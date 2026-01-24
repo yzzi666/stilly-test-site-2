@@ -7,39 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Toggle
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
+            // Simply toggle the class, let CSS handle the rest
+            navLinks.classList.toggle('active');
+
             const isOpen = navLinks.classList.contains('active');
-            if (isOpen) {
-                // Close
-                navLinks.style.display = 'none';
-                navLinks.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            } else {
-                // Open
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'fixed';
-                navLinks.style.top = '0';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100vw';
-                navLinks.style.height = '100vh';
-                navLinks.style.background = '#000';
-                navLinks.style.padding = '6rem 2rem';
-                navLinks.style.zIndex = '99';
-                navLinks.style.gap = '2rem';
-                navLinks.style.fontSize = '2rem'; // Big links
-                navLinks.classList.add('active');
-                menuToggle.setAttribute('aria-expanded', 'true');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
-            }
+            menuToggle.setAttribute('aria-expanded', isOpen);
+
+            // Toggle body scrolling
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
         // Close menu when link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                // Only act if we are in mobile mode (menu is open/active)
+                // If mobile menu is open, close it
                 if (navLinks.classList.contains('active')) {
-                    navLinks.style.display = ''; // Revert to CSS
                     navLinks.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
                     document.body.style.overflow = '';

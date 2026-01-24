@@ -180,6 +180,38 @@ h4 {
 
 .nav-links {
     display: none;
+    /* Hidden by default on mobile */
+}
+
+/* Mobile Menu Active State (Toggled by JS Class) */
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-black);
+    padding: 8rem 2rem 4rem;
+    /* Top padding clears the logo/toggle */
+    z-index: 900;
+    /* Behind the main-nav (1000) so toggle remains clickable */
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-links.active a {
+    font-size: 3rem;
+    color: var(--color-white);
+    font-weight: 900;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.nav-links.active a:hover {
+    color: var(--color-gray);
 }
 
 @media (min-width: 1024px) {
@@ -189,12 +221,40 @@ h4 {
 
     .nav-links {
         display: flex;
+        /* Always visible on desktop */
+        flex-direction: row;
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding: 0;
         gap: var(--space-m);
         font-weight: 700;
         text-transform: uppercase;
         font-size: 1.125rem;
         /* Larger for condensed */
         letter-spacing: 0.05em;
+    }
+
+    /* Reset mobile active styles if they get stuck */
+    .nav-links.active {
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        padding: 0;
+        flex-direction: row;
+    }
+
+    .nav-links.active a {
+        font-size: 1.125rem;
+        color: var(--color-black);
+        /* Reset to dark for desktop */
+    }
+
+    /* Standard Desktop Links */
+    .nav-links a {
+        color: var(--color-black);
     }
 }
 
