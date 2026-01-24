@@ -447,12 +447,19 @@ h4 {
     z-index: 2;
     position: relative;
     width: 100%;
-    max-width: 100%;
+    /* Ensure enough space for the massive text */
+    min-width: 850px;
+    max-width: none;
     margin-bottom: var(--space-s);
     text-align: left;
-    /* Explicit left align */
     padding-right: var(--space-m);
-    /* Anti-cramp */
+}
+
+@media (max-width: 1024px) {
+    .hero-content {
+        min-width: 100%;
+        /* Reset for smaller screens */
+    }
 }
 
 /* Re-enable pointer events for buttons */
@@ -462,11 +469,26 @@ h4 {
 
 .hero-title {
     font-size: clamp(4.5rem, 15vw, 9rem);
-    display: flex;
-    flex-direction: column;
+    display: block;
+    /* Changed from flex to allow cleaner flow */
     margin-bottom: var(--space-s);
     text-align: left;
     line-height: 0.85;
+    /* Safety for text gradients */
+    padding-right: 0.2em;
+    /* Increased safety buffer */
+    width: 100%;
+    overflow: visible;
+    /* Explicitly allow overflow */
+    max-width: none;
+}
+
+/* Ensure individual lines behave correctly */
+.hero-title span {
+    display: block;
+    width: max-content;
+    /* Ensure they take full need width */
+    max-width: 100%;
 }
 
 .hero-title .highlight {
@@ -935,6 +957,267 @@ h4 {
     border-top: 1px solid #f0f0f0;
     font-weight: 400;
 }
+
+/* Gradient Text Utility */
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* VP Section - Reference Match Layout */
+.vp-section {
+    padding: 6rem 0 4rem;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.vp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto 8rem;
+    position: relative;
+    z-index: 1;
+}
+
+.vp-row.reverse {
+    flex-direction: row-reverse;
+}
+
+/* TEXT/BANNER COLUMN */
+.vp-text-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* The Gradient Bar Container */
+.vp-banner-bar {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+/* The Infinite Gradient Background via Pseudo */
+/* The Infinite Gradient Background via Pseudo */
+.vp-banner-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 250vw;
+    /* Default Positioning: LEFT aligned (Standard) */
+    right: -60px;
+    /* Stop near box */
+    left: auto;
+    left: -150vw;
+    /* Reach far left */
+    border-radius: 0 100px 100px 0;
+}
+
+/* VP1 (Red Theme) */
+.vp-row.vp1-theme .vp-banner-bar::before {
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
+}
+
+/* VP2 (Green Theme) */
+.vp-row.vp2-theme .vp-banner-bar::before {
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+}
+
+/* Text Styling */
+.vp-header {
+    margin: 0;
+    font-family: var(--font-heading, sans-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-align: center;
+    z-index: 2;
+    text-shadow: none;
+
+    /* CRITICAL: RESET GLOBAL GRADIENT STYLES TO WHITE */
+    background: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: initial !important;
+    color: #ffffff !important;
+}
+
+/* Button Styling (Under Banner) */
+.vp-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 2px solid;
+    background: transparent;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-vp1 {
+    color: #bb1f45;
+    border-color: #bb1f45;
+}
+
+.btn-vp1:hover {
+    background: #bb1f45;
+    color: #fff;
+}
+
+.btn-vp2 {
+    color: #5ab344;
+    border-color: #5ab344;
+}
+
+.btn-vp2:hover {
+    background: #5ab344;
+    color: #fff;
+}
+
+/* BOX COLUMN */
+.vp-box-col {
+    flex: 0 0 450px;
+    max-width: 45%;
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Box overlap spacing */
+.vp-row:not(.reverse) .vp-box-col {
+    margin-left: -50px;
+}
+
+.vp-row.reverse .vp-box-col {
+    margin-right: -50px;
+}
+
+.vp-box-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.vp-box-img:hover {
+    transform: scale(1.02) translateY(-5px);
+}
+
+/* MOBILE LAYOUT */
+@media (max-width: 900px) {
+
+    .vp-row,
+    .vp-row.reverse {
+        flex-direction: column;
+        gap: 0rem;
+        margin-bottom: 4rem;
+        padding-top: 2rem;
+    }
+
+    /* Box goes first on mobile for visual stack */
+    .vp-box-col {
+        order: 1;
+        width: 80%;
+        max-width: 320px;
+        flex: none;
+        margin: 0 0 -50px 0 !important;
+        z-index: 10;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .vp-text-col {
+        order: 2;
+        width: 100%;
+    }
+
+    .vp-banner-bar {
+        height: 140px;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Full width gradient on mobile - Fixed positioning */
+    .vp-banner-bar::before {
+        width: 200vw;
+        border-radius: 0 !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%);
+        /* Centered stretch */
+    }
+
+    .vp-row:not(.reverse) .vp-banner-bar::before {
+        background: linear-gradient(90deg, #bb1f45, #ed584c);
+        left: 50% !important;
+    }
+
+    .vp-row.reverse .vp-banner-bar::before {
+        background: linear-gradient(90deg, #5ab344, #fdc31c);
+        left: 50% !important;
+        right: auto !important;
+    }
+
+    .vp-header {
+        font-size: 2rem;
+        padding: 0 1rem;
+    }
+}
+
+
+
+
+/* Global Heading Gradient Update */
+/* Global Heading Gradient Update */
+/* Global Text Gradients */
+/* VP1 Gradient (Red/Orange) for White Backgrounds */
+.hero-title,
+.section-title,
+h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    padding-right: 0.2em;
+}
+
+/* VP2 Gradient (Green/Yellow) for Black Backgrounds */
+.statement-text,
+.lifestyle-title,
+.benefit-number {
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    padding-right: 0.2em;
+}
+
+
 
 /* Desktop Overrides - Fixed Composition */
 @media (min-width: 1024px) {
