@@ -1,8 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Select elements
+    // Select elements (Moved to top level of scope)
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+
+    // Announcement Bar Logic
+    const announcements = [
+        "Free Shipping on Orders Over $50",
+        "New Flavor Drop: Pineapple Retox",
+        "Join the Squad & Get 10% Off"
+    ];
+    let currentAnnouncement = 0;
+    const announcementText = document.getElementById('announcement-text');
+    const prevBtn = document.querySelector('.announcement-nav.prev');
+    const nextBtn = document.querySelector('.announcement-nav.next');
+
+    if (announcementText && prevBtn && nextBtn) {
+        const updateAnnouncement = () => {
+            announcementText.style.opacity = '0';
+            setTimeout(() => {
+                announcementText.textContent = announcements[currentAnnouncement];
+                announcementText.style.opacity = '1';
+            }, 200);
+        };
+
+        prevBtn.addEventListener('click', () => {
+            currentAnnouncement = (currentAnnouncement - 1 + announcements.length) % announcements.length;
+            updateAnnouncement();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentAnnouncement = (currentAnnouncement + 1) % announcements.length;
+            updateAnnouncement();
+        });
+
+        // AutoPlay
+        setInterval(() => {
+            currentAnnouncement = (currentAnnouncement + 1) % announcements.length;
+            updateAnnouncement();
+        }, 5000);
+    }
 
     // Mobile Menu Toggle
     if (menuToggle) {

@@ -195,3 +195,13 @@ Usage intent: Sunny, optimistic accent — minimal use only.
 ### Aiming Fluid (Tangerine)
 Canonical Color: #f38018
 Usage intent: Sharp, energetic accent for emphasis moments.
+
+### VP1 Box
+Gradient Color: #bb1f45
+#ed584c
+#f69b64
+
+### VP2 Box
+Gradient Color: #5ab344
+#9db339
+#fdc31c

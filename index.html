@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STILLY | Natural Ingredients. Pure Fun.</title>
+    <title>STILLY | Natural Ingredients Pure Fun</title>
     <meta name="description"
         content="Premium vodka + natural juice. Cleaner cocktails with personality. 110 calories, gluten-free, no artificial sweeteners.">
 
@@ -20,19 +20,119 @@
         <div class="loader-logo">STILLY</div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <div class="announcement-left">
+            <span>Static Message</span>
+        </div>
+        <div class="announcement-center">
+            <button class="announcement-nav prev" aria-label="Previous announcement">‹</button>
+            <div class="announcement-text" id="announcement-text">Announcement 1</div>
+            <button class="announcement-nav next" aria-label="Next announcement">›</button>
+        </div>
+        <div class="announcement-right">
+            <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg></a>
+            <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg></a>
+            <a href="#" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                </svg></a>
+            <a href="#" aria-label="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0"></path>
+                    <path d="M12 2v20"></path>
+                </svg></a> <!-- Simplified generic pin icon -->
+            <a href="#" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                </svg></a>
+            <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg></a>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="#" class="logo-mark"><img src="assets/brand/stilly-logo.svg" alt="STILLY Logo"></a>
+
+            <!-- Mobile Toggle (Left on Mobile) -->
             <button class="menu-toggle" aria-label="Toggle Menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
-            <div class="nav-links">
-                <a href="#flavors">The Squad</a>
-                <a href="#about">Why Stilly</a>
-                <a href="#find">Where to Buy</a>
+
+            <!-- Left Group (Desktop Only) -->
+            <div class="nav-group left-group desktop-only">
+                <a href="#about">About</a>
+                <a href="#flavors">Flavors</a>
+                <a href="#press">Press</a>
             </div>
+
+            <!-- Center Group (Logo) -->
+            <div class="nav-group center-group">
+                <a href="#" class="logo-mark"><img src="assets/brand/stilly-logo.svg" alt="STILLY Logo"></a>
+            </div>
+
+            <!-- Right Group (Desktop + Icons) -->
+            <div class="nav-group right-group desktop-only">
+                <a href="#find" class="find-store-link">Find a Store</a>
+                <button class="icon-btn search-btn" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <button class="icon-btn user-btn" aria-label="Account">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </button>
+                <button class="icon-btn cart-btn" aria-label="Cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Drawer Links (Hidden by default) -->
+            <div class="nav-links">
+                <!-- Links moved here for mobile -->
+                <a href="#about">About</a>
+                <a href="#flavors">Flavors</a>
+                <a href="#press">Press</a>
+                <a href="#find">Find a Store</a>
+                <div class="mobile-icons">
+                    <a href="#">Account</a>
+                    <a href="#">Search</a>
+                    <a href="#">Cart</a>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -56,9 +156,9 @@
     <section class="brand-statement" id="about">
         <div class="container">
             <h2 class="statement-text">
-                Real does not mean natural.
+                Real does not mean natural
                 <br>
-                <span class="brand-highlight">STILLY</span> means real.
+                <span class="brand-highlight">STILLY</span> means real
             </h2>
             <div class="benefits-grid">
                 <div class="benefit-item">
