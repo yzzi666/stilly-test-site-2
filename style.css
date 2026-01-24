@@ -138,10 +138,8 @@ h4 {
 /* Announcement Bar */
 .announcement-bar {
     background-color: var(--color-light);
-    /* Or white if preferred */
     padding: 2px var(--space-m);
-    display: none;
-    /* Hidden on mobile by default or stacked? Ref usually hidden */
+    display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -152,6 +150,20 @@ h4 {
     position: relative;
     z-index: 1001;
     /* Above nav */
+}
+
+/* Mobile Logic: Hide Sides */
+@media (max-width: 1024px) {
+
+    .announcement-left,
+    .announcement-right {
+        display: none !important;
+    }
+
+    .announcement-center {
+        width: 100% !important;
+        justify-content: center !important;
+    }
 }
 
 .announcement-center {
@@ -457,22 +469,26 @@ h4 {
 
 @media (max-width: 1024px) {
     .hero-content {
-        min-width: 100%;
-        /* Reset for smaller screens */
+        min-width: 0;
+        /* Allow shrinking below content size */
+        width: 100%;
     }
 }
 
 @media (max-width: 600px) {
     .hero-title {
-        font-size: 13vw;
-        /* ~48-50px on iPhone */
-        padding-right: 0;
+        font-size: 10.5vw;
+        /* Reduced to safely fit INGREDIENTS on all widths */
+        padding-right: 0.2em;
+        /* Ensure gradient buffer exists */
     }
 
     .hero-can {
         max-width: 80%;
     }
 }
+
+
 
 /* Re-enable pointer events for buttons */
 .hero-content a {
@@ -1182,12 +1198,12 @@ h4 {
         /* Centered stretch */
     }
 
-    .vp-row:not(.reverse) .vp-banner-bar::before {
+    .vp-row.vp1-theme .vp-banner-bar::before {
         background: linear-gradient(90deg, #bb1f45, #ed584c);
         left: 50% !important;
     }
 
-    .vp-row.reverse .vp-banner-bar::before {
+    .vp-row.vp2-theme .vp-banner-bar::before {
         background: linear-gradient(90deg, #5ab344, #fdc31c);
         left: 50% !important;
         right: auto !important;
