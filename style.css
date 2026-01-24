@@ -462,6 +462,18 @@ h4 {
     }
 }
 
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 13vw;
+        /* ~48-50px on iPhone */
+        padding-right: 0;
+    }
+
+    .hero-can {
+        max-width: 80%;
+    }
+}
+
 /* Re-enable pointer events for buttons */
 .hero-content a {
     pointer-events: auto;
