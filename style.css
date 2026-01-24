@@ -139,13 +139,13 @@ h4 {
 .announcement-bar {
     background-color: var(--color-light);
     /* Or white if preferred */
-    padding: 0.5rem var(--space-m);
+    padding: 2px var(--space-m);
     display: none;
     /* Hidden on mobile by default or stacked? Ref usually hidden */
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
