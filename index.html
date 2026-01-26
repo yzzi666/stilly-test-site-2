@@ -129,7 +129,7 @@
             <a href="#flavors" class="btn btn-primary">Meet The Squad</a>
         </div>
         <div class="hero-visual">
-            <img src="assets/product/stilly-cranberry-lime-can.webp" alt="Partymaker Can" class="hero-can">
+            <img src="assets/product/dynamic/stilly-blackberry-dynamic-can.png" alt="Bonus Round Can" class="hero-can">
         </div>
     </header>
 
@@ -158,137 +158,39 @@
         </div>
     </section>
 
-    <!-- Flavor Exploration (Canon Names) -->
-    <section class="flavors" id="flavors">
-        <div class="section-header">
-            <h2 class="section-title">Meet the Squad</h2>
-            <p class="section-subtitle">Not just flavors</p>
-        </div>
+    <!-- Flavor Showcase (Interactive Selector) -->
+    <section class="flavor-showcase" id="flavors">
+        <div class="flavor-showcase-grid">
 
-        <div class="flavor-scroll-container">
+            <!-- Left: Flavor Info -->
+            <div class="flavor-info">
+                <span class="flavor-info-label">Meet the Squad</span>
+                <h2 class="flavor-info-name" id="showcase-name">Bonus Round</h2>
+                <p class="flavor-info-fruit" id="showcase-fruit">Blackberry</p>
+                <p class="flavor-info-desc" id="showcase-desc">Deep, confident, premium vodka.</p>
+                <a href="#" class="btn btn-primary flavor-cta">Shop Now</a>
+            </div>
 
-            <!-- Flavor 1: Bonus Round (Blackberry) -->
-            <article class="flavor-card" style="--accent: #5d398c;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Blackberry</span>
-                    <h3 class="flavor-name">Bonus Round</h3>
+            <!-- Center: Hero Can -->
+            <div class="flavor-can">
+                <div class="flavor-can-wrapper">
+                    <span class="flavor-brand-watermark" aria-hidden="true">STILLY</span>
+                    <img src="assets/product/stilly-blackberry-can.webp" alt="Bonus Round Can"
+                        class="showcase-can-image" id="showcase-can">
                 </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-blackberry-can.webp" alt="Bonus Round Can" class="can-image">
-                    <img src="assets/fruits/blackberry-fruit.webp" alt="" class="fruit-bg">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Deep, confident, premium vodka.</p>
-                </div>
-            </article>
+            </div>
 
-            <!-- Flavor 2: Cougar Juice (Black Cherry) -->
-            <article class="flavor-card" style="--accent: #73273f;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Black Cherry</span>
-                    <h3 class="flavor-name">Cougar Juice</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-black-cherry-can.webp" alt="Cougar Juice Can" class="can-image">
-                    <img src="assets/fruits/blackcherry-fruit.webp" alt="" class="fruit-bg">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Rich, bold accent with attitude.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 3: Partymaker (Cranberry Lime) -->
-            <article class="flavor-card" style="--accent: #ac203a;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Cranberry Lime</span>
-                    <h3 class="flavor-name">Partymaker</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-cranberry-lime-can.webp" alt="Partymaker Can" class="can-image">
-                    <img src="assets/fruits/cranberry-lime-fruit.webp" alt="" class="fruit-bg">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Energetic, social, always ready.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 4: Vibe Machine (Grapefruit) -->
-            <article class="flavor-card" style="--accent: #f07e7a;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Grapefruit</span>
-                    <h3 class="flavor-name">Vibe Machine</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-grapefruit-can.webp" alt="Vibe Machine Can" class="can-image">
-                    <img src="assets/fruits/grapefruit-fruit.webp" alt="" class="fruit-bg">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Bright, soft, modern citrus.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 5: Fiesta Fuel (Lime) -->
-            <article class="flavor-card" style="--accent: #3b9a3b;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Lime</span>
-                    <h3 class="flavor-name">Fiesta Fuel</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-lime-can.webp" alt="Fiesta Fuel Can" class="can-image"
-                        loading="lazy">
-                    <img src="assets/fruits/lime-fruit.webp" alt="" class="fruit-bg" loading="lazy">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Fresh, crisp, unrestrained.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 6: The Fuzz (Peach) -->
-            <article class="flavor-card" style="--accent: #f7aa8d;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Peach</span>
-                    <h3 class="flavor-name">The Fuzz</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-peach-can.webp" alt="The Fuzz Can" class="can-image" loading="lazy">
-                    <img src="assets/fruits/peach-fruit.webp" alt="" class="fruit-bg" loading="lazy">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Warm, playful, summer vibes.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 7: Retox (Pineapple) -->
-            <article class="flavor-card" style="--accent: #fcd248;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Pineapple</span>
-                    <h3 class="flavor-name">Retox</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-pineapple-can.webp" alt="Retox Can" class="can-image"
-                        loading="lazy">
-                    <img src="assets/fruits/pineapple-fruit.webp" alt="" class="fruit-bg" loading="lazy">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Sunny, optimistic, essential.</p>
-                </div>
-            </article>
-
-            <!-- Flavor 8: Aiming Fluid (Tangerine) -->
-            <article class="flavor-card" style="--accent: #f38018;">
-                <div class="flavor-header">
-                    <span class="flavor-fruit">Tangerine</span>
-                    <h3 class="flavor-name">Aiming Fluid</h3>
-                </div>
-                <div class="flavor-visual">
-                    <img src="assets/product/stilly-tangerine-can.webp" alt="Aiming Fluid Can" class="can-image"
-                        loading="lazy">
-                    <img src="assets/fruits/tangerine-fruit.webp" alt="" class="fruit-bg" loading="lazy">
-                </div>
-                <div class="flavor-desc-wrapper">
-                    <p class="flavor-desc">Sharp, energetic, precise.</p>
-                </div>
-            </article>
+            <!-- Right: Flavor List -->
+            <nav class="flavor-list" id="flavor-list" aria-label="Flavor Selection">
+                <button class="flavor-list-item active" data-flavor="bonus-round">Bonus Round</button>
+                <button class="flavor-list-item" data-flavor="cougar-juice">Cougar Juice</button>
+                <button class="flavor-list-item" data-flavor="partymaker">Partymaker</button>
+                <button class="flavor-list-item" data-flavor="vibe-machine">Vibe Machine</button>
+                <button class="flavor-list-item" data-flavor="fiesta-fuel">Fiesta Fuel</button>
+                <button class="flavor-list-item" data-flavor="the-fuzz">The Fuzz</button>
+                <button class="flavor-list-item" data-flavor="retox">Retox</button>
+                <button class="flavor-list-item" data-flavor="aiming-fluid">Aiming Fluid</button>
+            </nav>
 
         </div>
     </section>

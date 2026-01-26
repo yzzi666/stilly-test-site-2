@@ -82,11 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Fade in elements - SEPARATE LOGIC FOR CARDS
-    const generalElements = document.querySelectorAll('.benefit-item, .statement-text, .hero-content');
-    const flavorCards = document.querySelectorAll('.flavor-card');
+    // Fade in elements - General (not flavor cards anymore)
+    const generalElements = document.querySelectorAll('.benefit-item, .statement-text, .hero-content, .flavor-info, .flavor-can');
 
-    // 1. General Elements (Standard fade)
     generalElements.forEach((el) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -94,18 +92,126 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 2. Flavor Cards (Strict sequential stagger)
-    flavorCards.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(50px)'; // Little more movement
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out'; // Slightly faster
+    // ================================================
+    // FLAVOR SHOWCASE - Interactive Selector
+    // ================================================
 
-        // Strict index-based delay. 
-        // 0, 0.1, 0.2, 0.3... regardless of other elements on page
-        el.style.transitionDelay = `${(index % 4) * 0.15}s`;
+    const flavorData = {
+        'bonus-round': {
+            id: 'bonus-round',
+            name: 'Bonus Round',
+            fruit: 'Blackberry',
+            description: 'Deep, confident, premium vodka.',
+            canImage: 'assets/product/stilly-blackberry-can.webp',
+            accentColor: '#5d398c'
+        },
+        'cougar-juice': {
+            id: 'cougar-juice',
+            name: 'Cougar Juice',
+            fruit: 'Black Cherry',
+            description: 'Rich, bold accent with attitude.',
+            canImage: 'assets/product/stilly-black-cherry-can.webp',
+            accentColor: '#73273f'
+        },
+        'partymaker': {
+            id: 'partymaker',
+            name: 'Partymaker',
+            fruit: 'Cranberry Lime',
+            description: 'Energetic, social, always ready.',
+            canImage: 'assets/product/stilly-cranberry-lime-can.webp',
+            accentColor: '#ac203a'
+        },
+        'vibe-machine': {
+            id: 'vibe-machine',
+            name: 'Vibe Machine',
+            fruit: 'Grapefruit',
+            description: 'Bright, soft, modern citrus.',
+            canImage: 'assets/product/stilly-grapefruit-can.webp',
+            accentColor: '#f07e7a'
+        },
+        'fiesta-fuel': {
+            id: 'fiesta-fuel',
+            name: 'Fiesta Fuel',
+            fruit: 'Lime',
+            description: 'Fresh, crisp, unrestrained.',
+            canImage: 'assets/product/stilly-lime-can.webp',
+            accentColor: '#3b9a3b'
+        },
+        'the-fuzz': {
+            id: 'the-fuzz',
+            name: 'The Fuzz',
+            fruit: 'Peach',
+            description: 'Warm, playful, summer vibes.',
+            canImage: 'assets/product/stilly-peach-can.webp',
+            accentColor: '#f7aa8d'
+        },
+        'retox': {
+            id: 'retox',
+            name: 'Retox',
+            fruit: 'Pineapple',
+            description: 'Sunny, optimistic, essential.',
+            canImage: 'assets/product/stilly-pineapple-can.webp',
+            accentColor: '#fcd248'
+        },
+        'aiming-fluid': {
+            id: 'aiming-fluid',
+            name: 'Aiming Fluid',
+            fruit: 'Tangerine',
+            description: 'Sharp, energetic, precise.',
+            canImage: 'assets/product/stilly-tangerine-can.webp',
+            accentColor: '#f38018'
+        }
+    };
 
-        observer.observe(el);
-    });
+    // DOM Elements for Showcase
+    const flavorShowcase = document.querySelector('.flavor-showcase');
+    const flavorList = document.getElementById('flavor-list');
+    const showcaseName = document.getElementById('showcase-name');
+    const showcaseFruit = document.getElementById('showcase-fruit');
+    const showcaseDesc = document.getElementById('showcase-desc');
+    const showcaseCan = document.getElementById('showcase-can');
+
+    if (flavorShowcase && flavorList) {
+        // Event Delegation: Single listener on the list container
+        flavorList.addEventListener('click', (e) => {
+            const button = e.target.closest('.flavor-list-item');
+            if (!button) return;
+
+            const flavorId = button.dataset.flavor;
+            const flavor = flavorData[flavorId];
+            if (!flavor) return;
+
+            // Don't re-select already active flavor
+            if (button.classList.contains('active')) return;
+
+            // Update active state in list
+            flavorList.querySelectorAll('.flavor-list-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            button.classList.add('active');
+
+            // Update accent color (CSS variable on section)
+            flavorShowcase.style.setProperty('--accent-color', flavor.accentColor);
+
+            // Animate can transition
+            showcaseCan.classList.add('transitioning');
+
+            // After fade out, swap content
+            setTimeout(() => {
+                // Update text content
+                showcaseName.textContent = flavor.name;
+                showcaseFruit.textContent = flavor.fruit;
+                showcaseDesc.textContent = flavor.description;
+
+                // Update can image
+                showcaseCan.src = flavor.canImage;
+                showcaseCan.alt = `${flavor.name} Can`;
+
+                // Fade back in
+                showcaseCan.classList.remove('transitioning');
+            }, 300);
+        });
+    }
 
     // Helper to add the class
     const style = document.createElement('style');
