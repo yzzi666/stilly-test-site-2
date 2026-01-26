@@ -562,8 +562,10 @@ h4 {
     position: relative;
     width: 100%;
     /* Fit container normally */
-    max-width: 500px;
-    /* Don't get too huge on tablets */
+    max-width: 400px;
+    /* Limit width to keep height reasonable */
+    aspect-ratio: 1 / 1;
+    /* Square aspect ratio to prevent excessive height */
     margin: 0 auto;
     /* Center it */
     height: auto;
@@ -576,16 +578,36 @@ h4 {
 }
 
 .hero-can {
-    width: 100%;
+    width: auto;
     height: auto;
-    /* Maintain aspect ratio naturally */
-    max-height: 60vh;
-    /* Cap height on tall screens */
+    max-height: 55vh;
     object-fit: contain;
     object-position: center bottom;
-    animation: float 6s ease-in-out infinite;
     filter: drop-shadow(30px 30px 60px rgba(0, 0, 0, 0.25));
     transform-origin: center center;
+}
+
+.hero-can-primary {
+    position: relative;
+    z-index: 2;
+    width: 65%;
+    left: 10%;
+    animation: float 7s ease-in-out infinite;
+}
+
+.hero-can-secondary {
+    position: absolute;
+    z-index: 1;
+    width: 60%;
+    left: 28%;
+    top: 20%;
+    filter: drop-shadow(20px 20px 40px rgba(0, 0, 0, 0.2)) brightness(0.95);
+    /* Manually adjust secondary can parameters here */
+    --scale: 0.6;
+    --rotate-start: 0deg;
+    --rotate-end: 6deg;
+    animation: float-secondary-v2 7s ease-in-out infinite !important;
+    pointer-events: none;
 }
 
 @keyframes float {
@@ -597,6 +619,142 @@ h4 {
 
     50% {
         transform: translateY(-25px) rotate(3deg);
+    }
+}
+
+@keyframes float-secondary-v2 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(var(--rotate-start)) scale(var(--scale));
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(var(--rotate-end)) scale(var(--scale));
+    }
+}
+
+.hero-splash {
+    position: absolute;
+    z-index: 0;
+    width: 150%;
+    /* Increase splash size */
+    left: 50%;
+    top: 50%;
+    /* Center anchor */
+    opacity: 1;
+    pointer-events: none;
+
+    /* Exposed Parameters for easy adjustment */
+    --splash-scale: 1.2;
+    --splash-rotate-start: 15deg;
+    --splash-rotate-end: -5deg;
+    --blur: 0.5px;
+    filter: blur(var(--blur));
+
+    animation: float-splash 7s ease-in-out infinite;
+}
+
+@keyframes float-splash {
+
+    0%,
+    100% {
+        /* Reverse direction: Move DOWN (positive Y) while cans move UP */
+        transform: translate(-50%, -50%) translateY(0) rotate(var(--splash-rotate-start)) scale(var(--splash-scale));
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(30px) rotate(var(--splash-rotate-end)) scale(var(--splash-scale));
+    }
+}
+
+.hero-berries-left {
+    position: absolute;
+    z-index: 3;
+    /* In front of splashing, maybe behind cans depending on overlap. Let's put in front of secondary, behind primary? Primary is 2. Secondary is 1. Splash is 0. */
+    /* "Left of main can" -> Main can is at left: 10%. So maybe left: -5%? */
+    left: 5%;
+    bottom: 50%;
+    width: 35%;
+    pointer-events: none;
+
+    --scale: 3.5;
+    --rotate-start: -10deg;
+    --rotate-end: 0deg;
+    --blur: 0.5px;
+    /* Depth of field effect */
+    filter: blur(var(--blur));
+
+    animation: float-reverse 7s ease-in-out infinite;
+    /* Slightly different timing */
+}
+
+.hero-berries-right {
+    position: absolute;
+    z-index: 0;
+    /* Behind secondary can? Or just around it. */
+    /* "Right of secondary can" -> Secondary is at 28%. So maybe at 60%? */
+    right: -10%;
+    top: 60%;
+    width: 30%;
+    pointer-events: none;
+
+    --scale: 2.5;
+    --rotate-start: 20deg;
+    --rotate-end: 30deg;
+    --blur: 0.5px;
+    filter: blur(var(--blur));
+
+    animation: float-reverse 7s ease-in-out infinite;
+}
+
+.hero-pineapple-left {
+    position: absolute;
+    z-index: 3;
+    /* Top Right of Pineapple Can */
+    left: 30%;
+    top: 65%;
+    width: 35%;
+    pointer-events: none;
+
+    --scale: 1.2;
+    --rotate-start: 90deg;
+    --rotate-end: 80deg;
+    --blur: 1.5px;
+    filter: blur(var(--blur));
+
+    animation: float-reverse 7s ease-in-out infinite;
+}
+
+.hero-pineapple-right {
+    position: absolute;
+    z-index: 3;
+    /* Bottom Right of Pineapple Can */
+    left: 85%;
+    top: 18%;
+    width: 40%;
+    pointer-events: none;
+
+    --scale: 0.7;
+    --rotate-start: -70deg;
+    --rotate-end: -60deg;
+    --blur: 3px;
+    filter: blur(var(--blur));
+
+    animation: float-reverse 7s ease-in-out infinite;
+}
+
+
+
+@keyframes float-reverse {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(var(--rotate-start)) scale(var(--scale));
+    }
+
+    50% {
+        transform: translateY(30px) rotate(var(--rotate-end)) scale(var(--scale));
     }
 }
 
