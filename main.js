@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Bonus Round',
             fruit: 'Blackberry',
             description: 'Deep, confident, premium vodka.',
-            canImage: 'assets/product/stilly-blackberry-can.webp',
+            canImage: 'assets/product/realistic/stilly-blackberry-realistic-can.webp',
             accentColor: '#5d398c'
         },
         'cougar-juice': {
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Cougar Juice',
             fruit: 'Black Cherry',
             description: 'Rich, bold accent with attitude.',
-            canImage: 'assets/product/stilly-black-cherry-can.webp',
+            canImage: 'assets/product/realistic/stilly-black-cherry-realistic-can.webp',
             accentColor: '#73273f'
         },
         'partymaker': {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Partymaker',
             fruit: 'Cranberry Lime',
             description: 'Energetic, social, always ready.',
-            canImage: 'assets/product/stilly-cranberry-lime-can.webp',
+            canImage: 'assets/product/realistic/stilly-cranberry-lime-realistic-can.webp',
             accentColor: '#ac203a'
         },
         'vibe-machine': {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Vibe Machine',
             fruit: 'Grapefruit',
             description: 'Bright, soft, modern citrus.',
-            canImage: 'assets/product/stilly-grapefruit-can.webp',
+            canImage: 'assets/product/realistic/stilly-grapefruit-realistic-can.webp',
             accentColor: '#f07e7a'
         },
         'fiesta-fuel': {
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Fiesta Fuel',
             fruit: 'Lime',
             description: 'Fresh, crisp, unrestrained.',
-            canImage: 'assets/product/stilly-lime-can.webp',
+            canImage: 'assets/product/realistic/stilly-lime-realistic-can.webp',
             accentColor: '#3b9a3b'
         },
         'the-fuzz': {
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'The Fuzz',
             fruit: 'Peach',
             description: 'Warm, playful, summer vibes.',
-            canImage: 'assets/product/stilly-peach-can.webp',
+            canImage: 'assets/product/realistic/stilly-peach-realistic-can.webp',
             accentColor: '#f7aa8d'
         },
         'retox': {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Retox',
             fruit: 'Pineapple',
             description: 'Sunny, optimistic, essential.',
-            canImage: 'assets/product/stilly-pineapple-can.webp',
+            canImage: 'assets/product/realistic/stilly-pineapple-realistic-can.webp',
             accentColor: '#fcd248'
         },
         'aiming-fluid': {
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Aiming Fluid',
             fruit: 'Tangerine',
             description: 'Sharp, energetic, precise.',
-            canImage: 'assets/product/stilly-tangerine-can.webp',
+            canImage: 'assets/product/realistic/stilly-tangerine-realistic-can.webp',
             accentColor: '#f38018'
         }
     };
@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showcaseFruit = document.getElementById('showcase-fruit');
     const showcaseDesc = document.getElementById('showcase-desc');
     const showcaseCan = document.getElementById('showcase-can');
+    const showcaseWatermark = document.querySelector('.flavor-brand-watermark'); // Dynamic Watermark
 
     if (flavorShowcase && flavorList) {
         // Event Delegation: Single listener on the list container
@@ -193,25 +194,78 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update accent color (CSS variable on section)
             flavorShowcase.style.setProperty('--accent-color', flavor.accentColor);
 
-            // Animate can transition
+            // Animate transition (Can + Text Elements)
             showcaseCan.classList.add('transitioning');
+            showcaseFruit.classList.add('transitioning');
+            showcaseName.classList.add('transitioning');
+            showcaseDesc.classList.add('transitioning');
+            document.querySelector('.flavor-icons-row').classList.add('transitioning');
 
-            // After fade out, swap content
+            // After fade out (300ms), swap content and show CAN immediately
             setTimeout(() => {
-                // Update text content
+                // Update text content (still hidden)
                 showcaseName.textContent = flavor.name;
                 showcaseFruit.textContent = flavor.fruit;
                 showcaseDesc.textContent = flavor.description;
+
+                // Update Watermark & Scale
+                if (showcaseWatermark) {
+                    showcaseWatermark.textContent = flavor.name;
+                    scaleFlavorWatermark();
+                }
 
                 // Update can image
                 showcaseCan.src = flavor.canImage;
                 showcaseCan.alt = `${flavor.name} Can`;
 
-                // Fade back in
+                // Fade CAN back in immediately
                 showcaseCan.classList.remove('transitioning');
+
+                // Stagger TEXT fade in (wait additional 200ms)
+                setTimeout(() => {
+                    showcaseName.classList.remove('transitioning');
+                    showcaseFruit.classList.remove('transitioning');
+                    showcaseDesc.classList.remove('transitioning');
+                    document.querySelector('.flavor-icons-row').classList.remove('transitioning');
+                }, 200);
+
             }, 300);
         });
     }
+
+    // Dynamic Watermark Scaling Function
+    const scaleFlavorWatermark = () => {
+        if (!showcaseWatermark) return;
+
+        // 1. Reset scale to measure natural width accurately
+        showcaseWatermark.style.transform = 'translate(-50%, -50%) scale(1)';
+
+        // 2. Measure rendered width
+        const naturalWidth = showcaseWatermark.getBoundingClientRect().width;
+
+        // Prevent errors if width is 0 (e.g. hidden)
+        if (naturalWidth === 0) return;
+
+        // 3. Calculate target width (92% of Viewport)
+        const viewportWidth = window.innerWidth;
+        const targetWidth = viewportWidth * 0.92;
+
+        // 4. Determine scale factor
+        const scaleFactor = targetWidth / naturalWidth;
+
+        // 5. Apply scale
+        showcaseWatermark.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
+    };
+
+    // Initial Scale (wait for fonts)
+    if (document.fonts) {
+        document.fonts.ready.then(scaleFlavorWatermark);
+    } else {
+        setTimeout(scaleFlavorWatermark, 100);
+    }
+
+    // Resize Listener
+    window.addEventListener('resize', scaleFlavorWatermark);
 
     // Helper to add the class
     const style = document.createElement('style');

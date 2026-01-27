@@ -759,54 +759,105 @@ h4 {
 }
 
 /* Buttons */
+/* Global Button Styling - Glowing Gradient Pill */
 .btn {
-    display: inline-block;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 1.25rem 2.5rem;
-    /* Larger tap targets */
     font-family: var(--font-heading);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-radius: 9999px;
-    transition: 0.3s;
+    border: none;
+    color: var(--color-white);
+    background: transparent;
     cursor: pointer;
     font-size: 1rem;
     line-height: 1;
+    z-index: 10;
+    isolation: isolate;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    /* Define the gradient once */
+    --btn-gradient: linear-gradient(90deg, #ff3b8d, #6366f1);
 }
 
-.btn-primary {
+/* SECTION SPECIFIC GRADIENTS */
+/* Black Backgrounds -> VP2 Gradient (Green/Yellow) */
+.lifestyle .btn {
+    --btn-gradient: linear-gradient(90deg, #5ab344, #fdc31c);
+}
+
+/* White Backgrounds & Hero -> VP1 Gradient (Red/Pink) */
+.flavor-showcase .btn,
+.hero .btn {
+    --btn-gradient: linear-gradient(90deg, #bb1f45, #ed584c);
+}
+
+/* 1. The Gradient Layer (Behind everything, acts as border and fill) */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    /* Defines border width */
+    background: var(--btn-gradient);
+    border-radius: inherit;
+    z-index: -2;
+    filter: blur(0px);
+    transition: filter 0.3s ease;
+}
+
+/* 2. The Glow Layer (Deep blur behind) */
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--btn-gradient);
+    border-radius: inherit;
+    z-index: -3;
+    filter: blur(10px);
+    opacity: 0.6;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+/* 3. The "Mask" Layer (The black center) */
+.btn .btn-bg {
+    position: absolute;
+    inset: 0;
     background-color: var(--color-black);
-    color: var(--color-white);
-    border: 1px solid var(--color-black);
+    /* Always black to match reference */
+    border-radius: inherit;
+    z-index: -1;
+    transition: opacity 0.4s ease;
 }
 
-.btn-primary:hover {
-    background-color: transparent;
-    color: var(--color-black);
+/* HOVER STATES */
+.btn:hover {
     transform: scale(1.02);
-}
-
-.btn-primary.btn-inverse {
-    background-color: var(--color-white);
-    color: var(--color-black);
-    border-color: var(--color-white);
-}
-
-.btn-primary.btn-inverse:hover {
-    background-color: transparent;
     color: var(--color-white);
 }
 
-
-.btn-outline {
-    background-color: transparent;
-    color: var(--color-white);
-    border: 1px solid var(--color-white);
+/* Fade out the black mask to reveal gradient fill */
+.btn:hover .btn-bg {
+    opacity: 0;
 }
 
-.btn-outline:hover {
-    background-color: var(--color-white);
-    color: var(--color-black);
+/* Intensify glow */
+.btn:hover::after {
+    opacity: 0.8;
+    filter: blur(15px);
+}
+
+/* Legacy overrides clean up */
+.btn-primary,
+.btn-outline,
+.btn-inverse {
+    background: transparent !important;
+    border: none !important;
+    color: var(--color-white) !important;
 }
 
 /* Brand Statement */
@@ -901,23 +952,32 @@ h4 {
     transition: background 0.6s ease-out;
 }
 
-/* Grid Layout: 3 Columns - FIXED WIDTHS to prevent reflow */
+/* Grid Layout: List Top, Visual Center, Info Bottom */
 .flavor-showcase-grid {
     display: grid;
-    grid-template-columns: 450px 1fr 280px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "list"
+        "visual"
+        "info";
     gap: var(--space-l);
     width: 100%;
     align-items: center;
+    justify-items: center;
 }
 
-/* Left Column: Flavor Info - LOCKED WIDTH */
+/* Left Column Area: Info (Now Bottom Center) */
 .flavor-info {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    padding-right: var(--space-m);
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
+    /* Wider for centered text */
+    justify-self: center;
+    text-align: center;
+    align-items: center;
 }
 
 .flavor-info-label {
@@ -928,12 +988,7 @@ h4 {
     font-weight: 700;
 }
 
-.flavor-info-name {
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    line-height: 0.9;
-    color: var(--color-black);
-    transition: color 0.4s ease-out;
-}
+
 
 .flavor-info-fruit {
     font-size: 1rem;
@@ -941,7 +996,14 @@ h4 {
     font-weight: 900;
     letter-spacing: 0.1em;
     color: var(--accent-color);
-    transition: color 0.4s ease-out;
+    transition: color 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flavor-info-fruit.transitioning {
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .flavor-info-desc {
@@ -949,25 +1011,84 @@ h4 {
     color: var(--color-dark);
     font-weight: 400;
     line-height: 1.5;
-    max-width: 320px;
+    max-width: 450px;
     opacity: 1;
     transition: opacity 0.3s ease-out;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    /* Transition setup */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flavor-info-desc.transitioning {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Icons Row - Below Description */
+.flavor-icons-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    /* Transition setup */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flavor-icons-row.transitioning {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.flavor-icon-badge {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+/* Flavor Name Transition */
+.flavor-info-name {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 0.9;
+    color: var(--color-black);
+    transition: color 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flavor-info-name.transitioning {
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 .flavor-cta {
     margin-top: var(--space-s);
-    align-self: flex-start;
+    align-self: center;
 }
 
-/* Center Column: Hero Can - DRAMATICALLY LARGER */
+/* Center Column Area: Hero Can (Center) */
 .flavor-can {
+    grid-area: visual;
     position: relative;
-    left: -10%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 600px;
+    min-height: 60vh;
+    width: 100%;
+    overflow: visible;
 }
 
 .flavor-can-wrapper {
@@ -992,12 +1113,15 @@ h4 {
     letter-spacing: 0.05em;
     color: transparent;
     -webkit-text-stroke: 3px var(--accent-color);
-    opacity: 0.9;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 12px var(--accent-color));
     pointer-events: none;
     user-select: none;
     z-index: 1;
     white-space: nowrap;
-    transition: -webkit-text-stroke 0.5s ease-out;
+    transition:
+        -webkit-text-stroke 0.5s ease-out,
+        filter 0.5s ease-out;
 }
 
 .showcase-can-image {
@@ -1005,77 +1129,85 @@ h4 {
     z-index: 2;
     width: auto;
     height: 100%;
-    max-height: 85vh;
-    min-height: 550px;
+    max-height: 70vh;
+    min-height: 450px;
     object-fit: contain;
     transition:
         opacity 0.4s ease-out,
         transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: scale(1.5) rotate(0deg);
+    transform: scale(1);
 }
 
 .showcase-can-image.transitioning {
     opacity: 0;
-    transform: scale(0.92) rotate(-2deg);
+    transform: scale(0.92);
 }
 
-/* Right Column: Flavor List - FIXED WIDTH */
+/* Right Column Area: Flavor List (Now Top Horizontal) */
 .flavor-list {
+    grid-area: list;
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding-left: var(--space-m);
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* visual wrap if needed */
+    justify-content: center;
+    gap: 2rem;
+    /* Increased gap */
+    padding: 0;
     width: 100%;
-    max-width: 280px;
+    max-width: 1200px;
 }
 
 .flavor-list-item {
     background: none;
     border: none;
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    /* Slightly smaller for header */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--color-gray);
     cursor: pointer;
-    text-align: left;
-    padding: 0.75rem 0;
+    text-align: center;
+    padding: 0.5rem 0;
     position: relative;
     transition:
         color 0.25s ease-out,
         transform 0.25s ease-out;
-    transform-origin: left center;
+    transform-origin: center center;
 }
 
+/* Bottom indicator for Horizontal layout */
 .flavor-list-item::before {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: 0.5rem;
+    left: 50%;
+    bottom: 0;
     width: 0;
     height: 3px;
     background-color: var(--accent-color);
+    transform: translateX(-50%);
     transition: width 0.3s ease-out;
 }
 
 .flavor-list-item:hover {
     color: var(--color-black);
-    transform: translateX(8px);
+    transform: translateY(-2px);
 }
 
 .flavor-list-item:hover::before {
-    width: 24px;
+    width: 100%;
 }
 
 .flavor-list-item.active {
     color: var(--color-black);
     font-weight: 900;
-    transform: translateX(12px);
+    transform: translateY(-2px);
 }
 
 .flavor-list-item.active::before {
-    width: 40px;
+    width: 100%;
     background-color: var(--accent-color);
 }
 
@@ -1408,39 +1540,18 @@ h4 {
 }
 
 /* Button Styling (Under Banner) */
+/* Button Styling (Under Banner) - Inherits .btn */
 .vp-btn {
-    display: inline-block;
-    padding: 1rem 3rem;
-    border: 2px solid;
-    background: transparent;
-    font-family: var(--font-heading, sans-serif);
-    font-weight: 800;
     font-size: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
 }
 
+/* Custom Gradients for VP Buttons */
 .btn-vp1 {
-    color: #bb1f45;
-    border-color: #bb1f45;
-}
-
-.btn-vp1:hover {
-    background: #bb1f45;
-    color: #fff;
+    --btn-gradient: linear-gradient(90deg, #bb1f45, #ed584c);
 }
 
 .btn-vp2 {
-    color: #5ab344;
-    border-color: #5ab344;
-}
-
-.btn-vp2:hover {
-    background: #5ab344;
-    color: #fff;
+    --btn-gradient: linear-gradient(90deg, #5ab344, #fdc31c);
 }
 
 /* BOX COLUMN */
