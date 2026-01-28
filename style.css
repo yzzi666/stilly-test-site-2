@@ -861,25 +861,109 @@ h4 {
 }
 
 /* Brand Statement */
+/* Brand Statement */
 .brand-statement {
     background-color: var(--color-black);
     color: var(--color-white);
     padding: var(--space-l) var(--space-m);
     text-align: center;
+    overflow: hidden;
+}
+
+.brand-grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 800px) 1fr;
+    align-items: center;
+    gap: var(--space-m);
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.brand-image-wrapper {
+    height: 70vh;
+    max-height: 800px;
+    min-height: 500px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.brand-lifestyle-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    filter: grayscale(30%);
+}
+
+.brand-lifestyle-img:hover {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: grayscale(0%);
+}
+
+.brand-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 var(--space-m);
 }
 
 .statement-text {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    width: 100%;
     margin-bottom: var(--space-l);
-    font-weight: 400;
-    line-height: 1;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
 }
 
-.statement-text .brand-highlight {
+.display-line {
+    font-size: clamp(4rem, 11vw, 10rem);
     font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    display: block;
+}
+
+.sub-line {
+    font-size: clamp(1rem, 2.5vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    display: block;
+    margin: 1.5rem 0;
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-underline {
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    /* Slightly tighter */
+    width: 100%;
+    height: 4px;
+    /* Thicker */
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    opacity: 1;
 }
 
 .benefits-grid {
@@ -887,6 +971,32 @@ h4 {
     gap: var(--space-l);
     justify-content: center;
     flex-wrap: wrap;
+}
+
+@media (max-width: 1200px) {
+    .brand-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .brand-image-wrapper {
+        height: 300px;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .brand-img-left {
+        order: 2;
+    }
+
+    .brand-img-right {
+        order: 3;
+    }
+
+    .brand-content {
+        order: 1;
+    }
 }
 
 .benefit-item {
@@ -991,7 +1101,7 @@ h4 {
 
 
 .flavor-info-fruit {
-    font-size: 1rem;
+    font-size: 2rem;
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 0.1em;
@@ -1007,11 +1117,11 @@ h4 {
 }
 
 .flavor-info-desc {
-    font-size: 1.125rem;
+    font-size: 2.25rem;
     color: var(--color-dark);
     font-weight: 400;
     line-height: 1.5;
-    max-width: 450px;
+    max-width: 900px;
     opacity: 1;
     transition: opacity 0.3s ease-out;
     margin-top: 0;
@@ -1050,8 +1160,8 @@ h4 {
 }
 
 .flavor-icon-badge {
-    width: 48px;
-    height: 48px;
+    width: 96px;
+    height: 96px;
     object-fit: contain;
     opacity: 0.9;
     flex-shrink: 0;
@@ -1059,7 +1169,7 @@ h4 {
 
 /* Flavor Name Transition */
 .flavor-info-name {
-    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-size: clamp(6rem, 10vw, 9rem);
     line-height: 0.9;
     color: var(--color-black);
     transition: color 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
@@ -1100,12 +1210,28 @@ h4 {
     height: 100%;
 }
 
-/* Brand Watermark - Large outlined STILLY behind can */
-.flavor-brand-watermark {
+/* Brand Watermark Container - Handles Position & Entrance/Exit Animation */
+.flavor-watermark-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.flavor-watermark-container.transitioning {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Brand Watermark Text - Handles Scale (via JS) */
+.flavor-brand-watermark {
     font-family: var(--font-heading);
     font-size: clamp(12rem, 27vw, 21rem);
     font-weight: 900;
@@ -1115,13 +1241,11 @@ h4 {
     -webkit-text-stroke: 3px var(--accent-color);
     opacity: 0.6;
     filter: drop-shadow(0 0 12px var(--accent-color));
-    pointer-events: none;
-    user-select: none;
-    z-index: 1;
     white-space: nowrap;
     transition:
         -webkit-text-stroke 0.5s ease-out,
         filter 0.5s ease-out;
+    /* Removed: position absolute, transform translate, transform transition */
 }
 
 .showcase-can-image {
@@ -1136,6 +1260,10 @@ h4 {
         opacity 0.4s ease-out,
         transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transform: scale(1);
+}
+
+.showcase-can-image:hover {
+    transform: scale(1.05);
 }
 
 .showcase-can-image.transitioning {
@@ -1356,8 +1484,69 @@ h4 {
 }
 
 .lifestyle-title {
-    font-size: clamp(3.5rem, 12vw, 8rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
     margin-bottom: var(--space-m);
+    /* VP2 Gradient */
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.ls-line-small {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.ls-underline {
+    position: relative;
+    display: inline-block;
+    font-size: 1.25em;
+    /* Slightly larger */
+    line-height: 1;
+    /* Fix for nested inline-block text gradient */
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.ls-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.1em;
+    /* Moved down to avoid overlap */
+    width: 100%;
+    height: 0.1em;
+    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    /* Gradient underline */
+}
+
+.ls-line-large {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 11vw, 7rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+.ls-line-xl {
+    font-family: var(--font-heading);
+    font-size: clamp(4.5rem, 15vw, 10rem);
+    font-weight: 900;
+    text-transform: uppercase;
     line-height: 0.85;
 }
 
@@ -1666,7 +1855,6 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 
 /* VP2 Gradient (Green/Yellow) for Black Backgrounds */
 .statement-text,
-.lifestyle-title,
 .benefit-number {
     background: linear-gradient(90deg, #5ab344, #fdc31c);
     background-clip: text;

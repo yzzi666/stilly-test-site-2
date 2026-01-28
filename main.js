@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const showcaseFruit = document.getElementById('showcase-fruit');
     const showcaseDesc = document.getElementById('showcase-desc');
     const showcaseCan = document.getElementById('showcase-can');
+    const showcaseWatermarkContainer = document.querySelector('.flavor-watermark-container');
     const showcaseWatermark = document.querySelector('.flavor-brand-watermark'); // Dynamic Watermark
 
     if (flavorShowcase && flavorList) {
@@ -200,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showcaseName.classList.add('transitioning');
             showcaseDesc.classList.add('transitioning');
             document.querySelector('.flavor-icons-row').classList.add('transitioning');
+            if (showcaseWatermarkContainer) showcaseWatermarkContainer.classList.add('transitioning');
 
             // After fade out (300ms), swap content and show CAN immediately
             setTimeout(() => {
@@ -227,6 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     showcaseFruit.classList.remove('transitioning');
                     showcaseDesc.classList.remove('transitioning');
                     document.querySelector('.flavor-icons-row').classList.remove('transitioning');
+                    if (showcaseWatermarkContainer) showcaseWatermarkContainer.classList.remove('transitioning');
                 }, 200);
 
             }, 300);
@@ -238,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!showcaseWatermark) return;
 
         // 1. Reset scale to measure natural width accurately
-        showcaseWatermark.style.transform = 'translate(-50%, -50%) scale(1)';
+        showcaseWatermark.style.transform = 'scale(1)';
 
         // 2. Measure rendered width
         const naturalWidth = showcaseWatermark.getBoundingClientRect().width;
@@ -254,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scaleFactor = targetWidth / naturalWidth;
 
         // 5. Apply scale
-        showcaseWatermark.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
+        showcaseWatermark.style.transform = `scale(${scaleFactor})`;
     };
 
     // Initial Scale (wait for fonts)
