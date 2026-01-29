@@ -43,7 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile Menu Toggle
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
+        const closeMenu = () => {
+            navLinks.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        };
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent document click from immediately closing
             // Simply toggle the class, let CSS handle the rest
             navLinks.classList.toggle('active');
 
@@ -57,14 +64,37 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close menu when link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                // If mobile menu is open, close it
                 if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
+                    closeMenu();
                 }
             });
         });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active')) {
+                // If click is NOT inside navLinks and NOT the menu toggle
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    closeMenu();
+                }
+            }
+        });
+
+        // Swipe Up to Close
+        let touchStartY = 0;
+        navLinks.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        navLinks.addEventListener('touchmove', (e) => {
+            const touchEndY = e.touches[0].clientY;
+            const diff = touchStartY - touchEndY;
+
+            // If swiping UP significantly (> 50px)
+            if (diff > 50) {
+                closeMenu();
+            }
+        }, { passive: true });
     }
 
     // Intersection Observer for Animation
@@ -279,5 +309,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+
+    // ================================================
+    // PRELOAD IMAGES (Performance)
+    // ================================================
+    // Preload all flavor can images to ensure instant switching
+    setTimeout(() => {
+        Object.values(flavorData).forEach(flavor => {
+            const img = new Image();
+            img.src = flavor.canImage;
+        });
+    }, 1000); // Small delay to prioritize initial render
+
+    // ================================================
+    // MOBILE TOUCH POLISH (Interactive Elements)
+    // ================================================
+    const interactiveSelectors = [
+        '.brand-lifestyle-img',
+        '.showcase-can-image',
+        '.vp-visual-content'
+    ];
+
+    document.addEventListener('click', (e) => {
+        let clickedInteractive = false;
+
+        interactiveSelectors.forEach(selector => {
+            const target = e.target.closest(selector);
+            if (target) {
+                clickedInteractive = true;
+
+                // Toggle current one
+                if (target.classList.contains('mobile-interacting')) {
+                    target.classList.remove('mobile-interacting');
+                } else {
+                    // Exclusive: Remove from all others first
+                    document.querySelectorAll('.mobile-interacting').forEach(el => {
+                        el.classList.remove('mobile-interacting');
+                    });
+                    target.classList.add('mobile-interacting');
+                }
+            }
+        });
+
+        // If clicked outside ANY interactive element, remove from all
+        if (!clickedInteractive) {
+            document.querySelectorAll('.mobile-interacting').forEach(el => {
+                el.classList.remove('mobile-interacting');
+            });
+        }
+    });
 
 });

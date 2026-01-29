@@ -225,6 +225,8 @@ h4 {
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
+    flex-direction: row-reverse;
+    /* Mobile: Swap Toggle & Logo position */
 }
 
 .logo-mark img {
@@ -374,21 +376,27 @@ h4 {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: auto;
+    /* Compact height */
+    max-height: 85vh;
+    /* Don't cover entire screen */
     background-color: var(--color-black);
-    padding: 8rem 2rem 4rem;
-    /* Top padding clears the logo/toggle */
+    padding: 6rem 2rem 3rem;
+    /* Reduced padding */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     z-index: 900;
-    /* Behind the main-nav (1000) so toggle remains clickable */
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-y: auto;
 }
 
 .nav-links.active a {
-    font-size: 3rem;
+    font-size: 1.75rem;
+    /* Smaller text */
     color: var(--color-white);
-    font-weight: 900;
+    font-weight: 800;
     text-transform: uppercase;
     transition: color 0.3s;
 }
@@ -477,14 +485,116 @@ h4 {
 
 @media (max-width: 600px) {
     .hero-title {
-        font-size: 10.5vw;
-        /* Reduced to safely fit INGREDIENTS on all widths */
+        font-size: 8.5vw;
+        /* Reduced to fit 'Ingredients.' */
         padding-right: 0.2em;
-        /* Ensure gradient buffer exists */
     }
 
     .hero-can {
         max-width: 80%;
+    }
+
+    /* ============================================================
+       MOBILE HERO PARAMETERS - ADJUST POSITIONS HERE
+       ============================================================ */
+    .hero-visual {
+        /* Primary Can (Blackberry) */
+        --m-can-primary-left: 0%;
+        --m-can-primary-top: 10%;
+        /* Added Top */
+        --m-can-primary-width: 65%;
+
+        /* Secondary Can (Pineapple) */
+        --m-can-secondary-left: 39%;
+        --m-can-secondary-top: 10%;
+        --m-can-secondary-width: 60%;
+
+        /* Floating Fruits */
+        /* Berries Left */
+        --m-berries-left-x: -5%;
+        /* Left */
+        --m-berries-left-y: 50%;
+        /* Bottom */
+        --m-berries-left-w: 35%;
+        /* Width */
+
+        /* Berries Right */
+        --m-berries-right-x: -5%;
+        /* Right */
+        --m-berries-right-y: 80%;
+        /* Top */
+        --m-berries-right-w: 30%;
+        /* Width */
+
+        /* Pineapple Left */
+        --m-pine-left-x: 10%;
+        /* Left */
+        --m-pine-left-y: 80%;
+        /* Top */
+        --m-pine-left-w: 35%;
+        /* Width */
+
+        /* Pineapple Right */
+        --m-pine-right-x: 75%;
+        /* Left */
+        --m-pine-right-y: 0%;
+        /* Top */
+        --m-pine-right-w: 40%;
+        /* Width */
+
+        /* Splash Image */
+        --m-splash-scale: 1.2;
+        --m-splash-top: 55%;
+        --m-splash-left: 40%;
+    }
+
+    /* APPLYING VARIABLES */
+    .hero-can-primary {
+        left: var(--m-can-primary-left) !important;
+        top: var(--m-can-primary-top, 0) !important;
+        width: var(--m-can-primary-width) !important;
+    }
+
+    .hero-can-secondary {
+        left: var(--m-can-secondary-left) !important;
+        top: var(--m-can-secondary-top) !important;
+        width: var(--m-can-secondary-width) !important;
+    }
+
+    .hero-berries-left {
+        left: var(--m-berries-left-x) !important;
+        bottom: var(--m-berries-left-y) !important;
+        width: var(--m-berries-left-w) !important;
+    }
+
+    .hero-berries-right {
+        right: var(--m-berries-right-x) !important;
+        top: var(--m-berries-right-y) !important;
+        width: var(--m-berries-right-w) !important;
+    }
+
+    .hero-pineapple-left {
+        left: var(--m-pine-left-x) !important;
+        top: var(--m-pine-left-y) !important;
+        width: var(--m-pine-left-w) !important;
+    }
+
+    .hero-pineapple-right {
+        left: var(--m-pine-right-x) !important;
+        top: var(--m-pine-right-y) !important;
+        width: var(--m-pine-right-w) !important;
+    }
+
+    .hero-splash {
+        /* Apply manual position */
+        top: var(--m-splash-top) !important;
+        left: var(--m-splash-left) !important;
+
+        /* OVERRIDE the desktop variable so the animation picks it up */
+        --splash-scale: var(--m-splash-scale);
+
+        /* Ensure animation continues running */
+        animation: float-splash 7s ease-in-out infinite !important;
     }
 }
 
@@ -899,7 +1009,15 @@ h4 {
     filter: grayscale(30%);
 }
 
-.brand-lifestyle-img:hover {
+@media (hover: hover) {
+    .brand-lifestyle-img:hover {
+        opacity: 1;
+        transform: scale(1.02);
+        filter: grayscale(0%);
+    }
+}
+
+.brand-lifestyle-img.mobile-interacting {
     opacity: 1;
     transform: scale(1.02);
     filter: grayscale(0%);
@@ -975,7 +1093,9 @@ h4 {
 
 @media (max-width: 1200px) {
     .brand-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        /* Force Flexbox for reliable ordering */
+        flex-direction: column;
         gap: 4rem;
     }
 
@@ -987,15 +1107,19 @@ h4 {
     }
 
     .brand-img-left {
+        order: 1;
+        /* Image */
+    }
+
+    .brand-content,
+    .lifestyle-content {
         order: 2;
+        /* Text in between */
     }
 
     .brand-img-right {
         order: 3;
-    }
-
-    .brand-content {
-        order: 1;
+        /* Image */
     }
 }
 
@@ -1262,7 +1386,13 @@ h4 {
     transform: scale(1);
 }
 
-.showcase-can-image:hover {
+@media (hover: hover) {
+    .showcase-can-image:hover {
+        transform: scale(1.05);
+    }
+}
+
+.showcase-can-image.mobile-interacting {
     transform: scale(1.05);
 }
 
@@ -1382,8 +1512,10 @@ h4 {
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
+        justify-content: flex-start;
+        /* Fix scroll accessibility */
         gap: 0;
-        padding: var(--space-s) 0;
+        padding: var(--space-s) 0 var(--space-s) 5vw;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
@@ -1564,274 +1696,402 @@ h4 {
     flex-wrap: wrap;
 }
 
-/* Footer */
+/* Footer - Redesigned */
 .main-footer {
     background-color: var(--color-white);
     color: var(--color-black);
-    padding: var(--space-l) var(--space-m);
-    border-top: 1px solid #f0f0f0;
-    /* Subtle divider */
+    padding: 4rem var(--space-m) 2rem;
+    border-top: 1px solid #e5e5e5;
+    font-family: var(--font-body);
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-l);
-    margin-bottom: var(--space-m);
+/* Top Section: Club & Form */
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-club-info h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    text-transform: none;
+    /* Reference image is not all caps */
+    letter-spacing: -0.02em;
+}
+
+.footer-club-info p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.footer-email-form {
+    flex: 1;
+    max-width: 600px;
+}
+
+.email-signup {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.email-signup input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 9999px;
+    border: none;
+    background-color: #f3f3f3;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-black);
+    outline: none;
+}
+
+.email-signup input::placeholder {
+    color: #888;
+}
+
+.email-signup button {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--color-black);
+    background: transparent;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.email-signup button:hover {
+    background: var(--color-black);
+    color: var(--color-white);
+}
+
+/* Middle Section: Legal & Social */
+.footer-middle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+.footer-legal-links a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s;
+}
+
+.footer-legal-links a:hover {
+    color: var(--color-black);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.footer-socials a {
+    color: #333;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-socials a:hover {
+    color: var(--color-black);
+    transform: translateY(-2px);
+}
+
+/* Bottom Section: Accessibility */
+.footer-accessibility {
     max-width: 1400px;
     margin: 0 auto 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: #888;
+    text-align: justify;
 }
 
-.footer-logo {
-    height: 30px;
-    margin-bottom: var(--space-s);
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-l);
-}
-
-.link-col h4 {
-    margin-bottom: var(--space-s);
-    font-size: 0.875rem;
-    opacity: 0.5;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-}
-
-.link-col a {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    transition: 0.2s;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    /* Larger */
-}
-
-.link-col a:hover {
-    color: var(--color-gray);
-    transform: translateX(5px);
-}
-
-.footer-legal {
-    font-size: 0.875rem;
-    opacity: 0.5;
-    text-align: center;
+.footer-store-list {
     max-width: 1400px;
     margin: 0 auto;
-    padding-top: var(--space-m);
-    border-top: 1px solid #f0f0f0;
-    font-weight: 400;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    gap: 1rem;
+    color: #333;
 }
 
-/* Gradient Text Utility */
-.text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
+.footer-store-list span {
+    color: #888;
 }
+
+.footer-store-list a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .footer-email-form {
+        width: 100%;
+        max-width: none;
+    }
+
+    .footer-middle {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .footer-socials {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
 
 /* VP Section - Reference Match Layout */
+/* Narrative Conclusion / Variety Pack (Redesigned) */
 .vp-section {
-    padding: 6rem 0 4rem;
-    overflow-x: hidden;
+    padding: 6rem var(--space-m) 8rem;
     position: relative;
-    width: 100%;
+    background-color: var(--color-light);
+    overflow: hidden;
 }
 
-.vp-row {
+.vp-content-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 6rem;
     max-width: 1200px;
-    margin: 0 auto 8rem;
+    margin: 0 auto;
+}
+
+/* Visual Side: Casual Overlap */
+.vp-visual-content {
     position: relative;
-    z-index: 1;
-}
-
-.vp-row.reverse {
-    flex-direction: row-reverse;
-}
-
-/* TEXT/BANNER COLUMN */
-.vp-text-col {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    position: relative;
+    align-items: center;
+    height: 400px;
+    /* Maintain volume */
+}
+
+.vp-img-primary {
+    width: 320px;
+    height: auto;
+    z-index: 2;
+    transform: rotate(-3deg) translateX(30px);
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vp-img-secondary {
+    position: absolute;
+    width: 280px;
+    height: auto;
     z-index: 1;
+    transform: rotate(6deg) translateX(-80px) translateY(-20px) scale(0.9);
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+    filter: brightness(0.95);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* The Gradient Bar Container */
-.vp-banner-bar {
-    width: 100%;
-    height: 180px;
+@media (hover: hover) {
+    .vp-visual-content:hover .vp-img-primary {
+        transform: rotate(0deg) translateX(40px) scale(1.05);
+        z-index: 3;
+    }
+
+    .vp-visual-content:hover .vp-img-secondary {
+        transform: rotate(12deg) translateX(-100px) translateY(-30px) scale(0.95);
+    }
+}
+
+.vp-visual-content.mobile-interacting .vp-img-primary {
+    transform: rotate(0deg) translateX(40px) scale(1.05);
+    z-index: 3;
+}
+
+.vp-visual-content.mobile-interacting .vp-img-secondary {
+    transform: rotate(12deg) translateX(-100px) translateY(-30px) scale(0.95);
+}
+
+/* Text Side: Friendly, Not "Salesy" */
+.vp-text-content {
+    flex: 1;
+    max-width: 480px;
+    text-align: left;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* The Infinite Gradient Background via Pseudo */
-/* The Infinite Gradient Background via Pseudo */
-.vp-banner-bar::before {
+.vp-header {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-family: var(--font-heading);
+    font-weight: 900;
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+    color: var(--color-black);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.vp-header .text-highlight {
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.vp-desc {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.vp-micro-copy {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.vp-micro-copy li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-gray);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.vp-micro-copy li::before {
     content: '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    width: 250vw;
-    /* Default Positioning: LEFT aligned (Standard) */
-    right: -60px;
-    /* Stop near box */
-    left: auto;
-    left: -150vw;
-    /* Reach far left */
-    border-radius: 0 100px 100px 0;
-}
-
-/* VP1 (Red Theme) */
-.vp-row.vp1-theme .vp-banner-bar::before {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: linear-gradient(90deg, #bb1f45, #ed584c);
 }
 
-/* VP2 (Green Theme) */
-.vp-row.vp2-theme .vp-banner-bar::before {
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
-}
-
-/* Text Styling */
-.vp-header {
-    margin: 0;
-    font-family: var(--font-heading, sans-serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    line-height: 1;
-    text-align: center;
-    z-index: 2;
-    text-shadow: none;
-
-    /* CRITICAL: RESET GLOBAL GRADIENT STYLES TO WHITE */
-    background: none !important;
-    -webkit-background-clip: border-box !important;
-    background-clip: border-box !important;
-    -webkit-text-fill-color: initial !important;
-    color: #ffffff !important;
-}
-
-/* Button Styling (Under Banner) */
-/* Button Styling (Under Banner) - Inherits .btn */
+/* Button override for this section */
 .vp-btn {
-    font-size: 1.25rem;
-}
-
-/* Custom Gradients for VP Buttons */
-.btn-vp1 {
     --btn-gradient: linear-gradient(90deg, #bb1f45, #ed584c);
+    font-size: 1.125rem;
+    padding: 1.5rem 3rem;
 }
 
-.btn-vp2 {
-    --btn-gradient: linear-gradient(90deg, #5ab344, #fdc31c);
-}
-
-/* BOX COLUMN */
-.vp-box-col {
-    flex: 0 0 450px;
-    max-width: 45%;
-    position: relative;
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Box overlap spacing */
-.vp-row:not(.reverse) .vp-box-col {
-    margin-left: -50px;
-}
-
-.vp-row.reverse .vp-box-col {
-    margin-right: -50px;
-}
-
-.vp-box-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.15));
-    transition: transform 0.3s ease;
-}
-
-.vp-box-img:hover {
-    transform: scale(1.02) translateY(-5px);
-}
-
-/* MOBILE LAYOUT */
+/* Mobile Responsiveness */
 @media (max-width: 900px) {
+    .vp-section {
+        padding: 4rem var(--space-m);
+    }
 
-    .vp-row,
-    .vp-row.reverse {
+    .vp-content-wrapper {
         flex-direction: column;
-        gap: 0rem;
-        margin-bottom: 4rem;
-        padding-top: 2rem;
+        gap: 2rem;
+        text-align: center;
     }
 
-    /* Box goes first on mobile for visual stack */
-    .vp-box-col {
-        order: 1;
-        width: 80%;
-        max-width: 320px;
-        flex: none;
-        margin: 0 0 -50px 0 !important;
-        z-index: 10;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
+    /* Reverse order visually on mobile: Image on top? 
+       Actually, "Can't Choose?" text might be better first?
+       Let's stick to valid HTML flow, maybe allow visual to be second or first.
+       Usually "Image -> Text" is good for products, but "Question -> Solution" is good for narrative.
+       Let's keep HTML order (Image then Text) but visual order ... wait HTML is Box -> Text NO HTML IS Visual -> Text.
+       Mobile: Visual First is standard.
+    */
 
-    .vp-text-col {
-        order: 2;
+    .vp-visual-content {
+        height: auto;
+        min-height: 300px;
         width: 100%;
+        margin-bottom: 1rem;
     }
 
-    .vp-banner-bar {
-        height: 140px;
-        margin-bottom: 1.5rem;
+    .vp-img-primary {
+        width: 60%;
+        max-width: 280px;
     }
 
-    /* Full width gradient on mobile - Fixed positioning */
-    .vp-banner-bar::before {
-        width: 200vw;
-        border-radius: 0 !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%);
-        /* Centered stretch */
+    .vp-img-secondary {
+        width: 55%;
+        max-width: 260px;
     }
 
-    .vp-row.vp1-theme .vp-banner-bar::before {
-        background: linear-gradient(90deg, #bb1f45, #ed584c);
-        left: 50% !important;
+    .vp-text-content {
+        align-items: center;
+        text-align: center;
     }
 
-    .vp-row.vp2-theme .vp-banner-bar::before {
-        background: linear-gradient(90deg, #5ab344, #fdc31c);
-        left: 50% !important;
-        right: auto !important;
+    .vp-micro-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .vp-header {
-        font-size: 2rem;
-        padding: 0 1rem;
+    .vp-micro-copy li {
+        text-align: left;
+        /* Keep bullets consistent aligned */
+        width: fit-content;
     }
 }
 
