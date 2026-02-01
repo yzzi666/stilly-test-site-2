@@ -136,77 +136,11 @@ h4 {
 }
 
 /* Announcement Bar */
-.announcement-bar {
-    background-color: var(--color-light);
-    padding: 2px var(--space-m);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    position: relative;
-    z-index: 1001;
-    /* Above nav */
-}
 
-/* Mobile Logic: Hide Sides */
-@media (max-width: 1024px) {
-
-    .announcement-left,
-    .announcement-right {
-        display: none !important;
-    }
-
-    .announcement-center {
-        width: 100% !important;
-        justify-content: center !important;
-    }
-}
-
-.announcement-center {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.announcement-nav {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.25rem;
-    color: var(--color-gray);
-    line-height: 1;
-    padding: 0 0.25rem;
-}
-
-.announcement-nav:hover {
-    color: var(--color-black);
-}
-
-.announcement-right {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.announcement-right a {
-    color: var(--color-black);
-    display: flex;
-    align-items: center;
-}
-
-.announcement-right a:hover {
-    color: var(--color-gray);
-}
 
 /* Navigation - Redesigned */
 .main-nav {
-    position: sticky;
-    /* Sticky instead of fixed for top bar flow? Or fixed below top bar? */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -282,9 +216,7 @@ h4 {
 @media (min-width: 1024px) {
 
     /* Show Announcement Bar */
-    .announcement-bar {
-        display: flex;
-    }
+
 
     /* Grid Layout for Header */
     .nav-container {
@@ -483,7 +415,7 @@ h4 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1023px) {
     .hero-title {
         font-size: 8.5vw;
         /* Reduced to fit 'Ingredients.' */
@@ -672,7 +604,7 @@ h4 {
     position: relative;
     width: 100%;
     /* Fit container normally */
-    max-width: 400px;
+    max-width: 550px;
     /* Limit width to keep height reasonable */
     aspect-ratio: 1 / 1;
     /* Square aspect ratio to prevent excessive height */
@@ -693,7 +625,7 @@ h4 {
     max-height: 55vh;
     object-fit: contain;
     object-position: center bottom;
-    filter: drop-shadow(30px 30px 60px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(30px 30px 60px rgba(0, 0, 0, 0.2));
     transform-origin: center center;
 }
 
@@ -702,6 +634,13 @@ h4 {
     z-index: 2;
     width: 65%;
     left: 10%;
+    top: 2%;
+
+    /* Primary Can Parameters */
+    --scale: 1;
+    --rotate-start: -18deg;
+    --rotate-end: -14deg;
+
     animation: float 7s ease-in-out infinite;
 }
 
@@ -710,12 +649,11 @@ h4 {
     z-index: 1;
     width: 60%;
     left: 28%;
-    top: 20%;
-    filter: drop-shadow(20px 20px 40px rgba(0, 0, 0, 0.2)) brightness(0.95);
+    top: 22%;
     /* Manually adjust secondary can parameters here */
-    --scale: 0.6;
-    --rotate-start: 0deg;
-    --rotate-end: 6deg;
+    --scale: 0.7;
+    --rotate-start: 10deg;
+    --rotate-end: 14deg;
     animation: float-secondary-v2 7s ease-in-out infinite !important;
     pointer-events: none;
 }
@@ -724,11 +662,11 @@ h4 {
 
     0%,
     100% {
-        transform: translateY(0) rotate(-3deg);
+        transform: translateY(0) rotate(var(--rotate-start)) scale(var(--scale));
     }
 
     50% {
-        transform: translateY(-25px) rotate(3deg);
+        transform: translateY(-25px) rotate(var(--rotate-end)) scale(var(--scale));
     }
 }
 
@@ -898,7 +836,7 @@ h4 {
 /* SECTION SPECIFIC GRADIENTS */
 /* Black Backgrounds -> VP2 Gradient (Green/Yellow) */
 .lifestyle .btn {
-    --btn-gradient: linear-gradient(90deg, #5ab344, #fdc31c);
+    --btn-gradient: linear-gradient(90deg, #bb1f45, #ed584c);
 }
 
 /* White Backgrounds & Hero -> VP1 Gradient (Red/Pink) */
@@ -973,8 +911,8 @@ h4 {
 /* Brand Statement */
 /* Brand Statement */
 .brand-statement {
-    background-color: var(--color-black);
-    color: var(--color-white);
+    background-color: var(--color-light);
+    color: var(--color-black);
     padding: var(--space-l) var(--space-m);
     text-align: center;
     overflow: hidden;
@@ -1037,7 +975,7 @@ h4 {
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--color-white);
+    color: var(--color-black);
 }
 
 .display-line {
@@ -1054,7 +992,7 @@ h4 {
     letter-spacing: 0.15em;
     display: block;
     margin: 1.5rem 0;
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -1064,7 +1002,7 @@ h4 {
 .text-underline {
     position: relative;
     display: inline-block;
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -1080,7 +1018,7 @@ h4 {
     width: 100%;
     height: 4px;
     /* Thicker */
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     opacity: 1;
 }
 
@@ -1135,7 +1073,7 @@ h4 {
     font-size: 4rem;
     font-weight: 900;
     line-height: 0.9;
-    background: linear-gradient(180deg, #fff, #aaa);
+    background: linear-gradient(180deg, #000, #555);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1148,7 +1086,7 @@ h4 {
     text-transform: uppercase;
     letter-spacing: 0.2em;
     margin-top: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
     padding-top: 0.5rem;
     font-weight: 700;
 }
@@ -1224,86 +1162,13 @@ h4 {
 
 
 
-.flavor-info-fruit {
-    font-size: 2rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    color: var(--accent-color);
-    transition: color 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.flavor-info-fruit.transitioning {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-.flavor-info-desc {
-    font-size: 2.25rem;
-    color: var(--color-dark);
-    font-weight: 400;
-    line-height: 1.5;
-    max-width: 900px;
-    opacity: 1;
-    transition: opacity 0.3s ease-out;
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    /* Transition setup */
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.flavor-info-desc.transitioning {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-/* Icons Row - Below Description */
-.flavor-icons-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-    /* Transition setup */
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.flavor-icons-row.transitioning {
-    opacity: 0;
-    transform: translateY(10px);
-}
-
-.flavor-icon-badge {
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-    opacity: 0.9;
-    flex-shrink: 0;
-}
-
-/* Flavor Name Transition */
-.flavor-info-name {
-    font-size: clamp(6rem, 10vw, 9rem);
+/* Tagline Replacement */
+.flavor-tagline {
+    font-size: clamp(3rem, 7vw, 8rem);
     line-height: 0.9;
     color: var(--color-black);
-    transition: color 0.4s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.flavor-info-name.transitioning {
-    opacity: 0;
-    transform: translateY(-10px);
+    margin-bottom: var(--space-m);
+    white-space: nowrap;
 }
 
 .flavor-cta {
@@ -1383,22 +1248,23 @@ h4 {
     transition:
         opacity 0.4s ease-out,
         transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: scale(1);
+    /* Scale up and move up so watermark hits center of can body */
+    transform: scale(1.25) translateY(-5%);
 }
 
 @media (hover: hover) {
     .showcase-can-image:hover {
-        transform: scale(1.05);
+        transform: scale(1.3) translateY(-5%);
     }
 }
 
 .showcase-can-image.mobile-interacting {
-    transform: scale(1.05);
+    transform: scale(1.3) translateY(-5%);
 }
 
 .showcase-can-image.transitioning {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(1.15) translateY(-5%);
 }
 
 /* Right Column Area: Flavor List (Now Top Horizontal) */
@@ -1577,8 +1443,8 @@ h4 {
 .lifestyle {
     position: relative;
     min-height: 70vh;
-    background-color: var(--color-black);
-    color: var(--color-white);
+    background-color: var(--color-light);
+    color: var(--color-black);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1588,26 +1454,10 @@ h4 {
 }
 
 .lifestyle-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(30, 30, 30, 0) 0%, rgba(5, 5, 5, 1) 120%);
-    z-index: 1;
+    display: none;
 }
 
-.lifestyle::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-}
+
 
 .lifestyle-content {
     z-index: 2;
@@ -1622,7 +1472,7 @@ h4 {
     gap: 0.25em;
     margin-bottom: var(--space-m);
     /* VP2 Gradient */
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -1647,7 +1497,7 @@ h4 {
     /* Slightly larger */
     line-height: 1;
     /* Fix for nested inline-block text gradient */
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -1662,7 +1512,7 @@ h4 {
     /* Moved down to avoid overlap */
     width: 100%;
     height: 0.1em;
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     /* Gradient underline */
 }
 
@@ -1698,7 +1548,7 @@ h4 {
 
 /* Footer - Redesigned */
 .main-footer {
-    background-color: var(--color-white);
+    background-color: var(--color-light);
     color: var(--color-black);
     padding: 4rem var(--space-m) 2rem;
     border-top: 1px solid #e5e5e5;
@@ -1750,8 +1600,8 @@ h4 {
     width: 100%;
     padding: 1rem 1.5rem;
     border-radius: 9999px;
-    border: none;
-    background-color: #f3f3f3;
+    border: 1px solid var(--color-black);
+    background-color: #ffffff;
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--color-black);
@@ -1869,8 +1719,82 @@ h4 {
     text-decoration: underline;
 }
 
+.footer-can-lineup {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    /* Break out of parent padding to full width */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    margin-top: 1rem;
+    /* Reduced top margin */
+    overflow-x: hidden;
+    /* Hide horizontal scroll on desktop to avoid scrollbars with negative margins */
+    overflow-y: hidden;
+    height: 350px;
+    /* Taller */
+    gap: 0;
+    margin-bottom: -2rem;
+    padding-bottom: 0;
+
+    /* Mobile scroll support */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Allow horizontal scroll on mobile only */
+@media (max-width: 900px) {
+    .footer-can-lineup {
+        overflow-x: auto;
+    }
+}
+
+.footer-can-lineup::-webkit-scrollbar {
+    display: none;
+}
+
+.footer-can-lineup img {
+    /* Dynamic sizing - Much Larger */
+    width: 18%;
+    /* Significantly wider than 12.5% (1/8) to force overlap */
+    min-width: 220px;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(45%);
+    /* Show top ~50-60% */
+    display: block;
+    margin: 0 -3.5%;
+    /* Percent based overlap */
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+/* No hover effect */
+
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
+    .footer-can-lineup {
+        height: 250px;
+        margin-top: 0.5rem;
+        /* Significantly reduced from 2rem to close gap */
+        justify-content: flex-start;
+    }
+
+    .footer-can-lineup img {
+        width: 50vw;
+        /* Even larger on mobile */
+        min-width: 160px;
+        transform: translateY(55%);
+        margin: 0 -35px;
+        /* Much tighter spacing for overlap (-15px -> -35px) */
+    }
+
     .footer-top {
         flex-direction: column;
         align-items: flex-start;
@@ -2116,7 +2040,7 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 /* VP2 Gradient (Green/Yellow) for Black Backgrounds */
 .statement-text,
 .benefit-number {
-    background: linear-gradient(90deg, #5ab344, #fdc31c);
+    background: linear-gradient(90deg, #bb1f45, #ed584c);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -2207,4 +2131,30 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
         justify-content: flex-end;
         gap: 8rem;
     }
+}
+
+
+.instagram-section {
+    padding: var(--space-l) var(--space-m);
+    text-align: center;
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-title {
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-m);
+    color: var(--color-black);
+    text-align: center;
+}
+
+.instagram-btn {
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    font-weight: 700;
 }

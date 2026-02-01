@@ -4,42 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
-    // Announcement Bar Logic
-    const announcements = [
-        "Free Shipping on Orders Over $50",
-        "New Flavor Drop: Pineapple Retox",
-        "Join the Squad & Get 10% Off"
-    ];
-    let currentAnnouncement = 0;
-    const announcementText = document.getElementById('announcement-text');
-    const prevBtn = document.querySelector('.announcement-nav.prev');
-    const nextBtn = document.querySelector('.announcement-nav.next');
 
-    if (announcementText && prevBtn && nextBtn) {
-        const updateAnnouncement = () => {
-            announcementText.style.opacity = '0';
-            setTimeout(() => {
-                announcementText.textContent = announcements[currentAnnouncement];
-                announcementText.style.opacity = '1';
-            }, 200);
-        };
-
-        prevBtn.addEventListener('click', () => {
-            currentAnnouncement = (currentAnnouncement - 1 + announcements.length) % announcements.length;
-            updateAnnouncement();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentAnnouncement = (currentAnnouncement + 1) % announcements.length;
-            updateAnnouncement();
-        });
-
-        // AutoPlay
-        setInterval(() => {
-            currentAnnouncement = (currentAnnouncement + 1) % announcements.length;
-            updateAnnouncement();
-        }, 5000);
-    }
 
     // Mobile Menu Toggle
     if (menuToggle) {
@@ -196,12 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements for Showcase
     const flavorShowcase = document.querySelector('.flavor-showcase');
     const flavorList = document.getElementById('flavor-list');
-    const showcaseName = document.getElementById('showcase-name');
-    const showcaseFruit = document.getElementById('showcase-fruit');
-    const showcaseDesc = document.getElementById('showcase-desc');
+    // const showcaseName = document.getElementById('showcase-name');
+    // const showcaseFruit = document.getElementById('showcase-fruit');
+    // const showcaseDesc = document.getElementById('showcase-desc');
     const showcaseCan = document.getElementById('showcase-can');
     const showcaseWatermarkContainer = document.querySelector('.flavor-watermark-container');
     const showcaseWatermark = document.querySelector('.flavor-brand-watermark'); // Dynamic Watermark
+    // const flavorIconsRow = document.querySelector('.flavor-icons-row');
 
     if (flavorShowcase && flavorList) {
         // Event Delegation: Single listener on the list container
@@ -226,19 +192,21 @@ document.addEventListener('DOMContentLoaded', () => {
             flavorShowcase.style.setProperty('--accent-color', flavor.accentColor);
 
             // Animate transition (Can + Text Elements)
+            // Animate transition (Can Only)
             showcaseCan.classList.add('transitioning');
-            showcaseFruit.classList.add('transitioning');
-            showcaseName.classList.add('transitioning');
-            showcaseDesc.classList.add('transitioning');
-            document.querySelector('.flavor-icons-row').classList.add('transitioning');
+            // showcaseFruit.classList.add('transitioning');
+            // showcaseName.classList.add('transitioning');
+            // showcaseDesc.classList.add('transitioning');
+            // if (flavorIconsRow) flavorIconsRow.classList.add('transitioning');
             if (showcaseWatermarkContainer) showcaseWatermarkContainer.classList.add('transitioning');
 
             // After fade out (300ms), swap content and show CAN immediately
             setTimeout(() => {
                 // Update text content (still hidden)
-                showcaseName.textContent = flavor.name;
-                showcaseFruit.textContent = flavor.fruit;
-                showcaseDesc.textContent = flavor.description;
+                // Update text content (REMOVED: Static Tagline)
+                // showcaseName.textContent = flavor.name;
+                // showcaseFruit.textContent = flavor.fruit;
+                // showcaseDesc.textContent = flavor.description;
 
                 // Update Watermark & Scale
                 if (showcaseWatermark) {
@@ -254,11 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 showcaseCan.classList.remove('transitioning');
 
                 // Stagger TEXT fade in (wait additional 200ms)
+                // Stagger TEXT fade in (wait additional 200ms)
                 setTimeout(() => {
-                    showcaseName.classList.remove('transitioning');
-                    showcaseFruit.classList.remove('transitioning');
-                    showcaseDesc.classList.remove('transitioning');
-                    document.querySelector('.flavor-icons-row').classList.remove('transitioning');
+                    // showcaseName.classList.remove('transitioning');
+                    // showcaseFruit.classList.remove('transitioning');
+                    // showcaseDesc.classList.remove('transitioning');
+                    // if (flavorIconsRow) flavorIconsRow.classList.remove('transitioning');
                     if (showcaseWatermarkContainer) showcaseWatermarkContainer.classList.remove('transitioning');
                 }, 200);
 
