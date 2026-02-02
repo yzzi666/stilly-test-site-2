@@ -417,7 +417,7 @@ h4 {
 
 @media (max-width: 1023px) {
     .hero-title {
-        font-size: 8.5vw;
+        font-size: 13.5vw;
         /* Reduced to fit 'Ingredients.' */
         padding-right: 0.2em;
     }
@@ -537,20 +537,22 @@ h4 {
     pointer-events: auto;
 }
 
-.hero-title {
-    font-size: clamp(4.5rem, 15vw, 9rem);
-    display: block;
-    /* Changed from flex to allow cleaner flow */
-    margin-bottom: var(--space-s);
-    text-align: left;
-    line-height: 0.85;
-    /* Safety for text gradients */
-    padding-right: 0.2em;
-    /* Increased safety buffer */
-    width: 100%;
-    overflow: visible;
-    /* Explicitly allow overflow */
-    max-width: none;
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: clamp(4.5rem, 15vw, 9rem);
+        display: block;
+        /* Changed from flex to allow cleaner flow */
+        margin-bottom: var(--space-s);
+        text-align: left;
+        line-height: 0.85;
+        /* Safety for text gradients */
+        padding-right: 0.2em;
+        /* Increased safety buffer */
+        width: 100%;
+        overflow: visible;
+        /* Explicitly allow overflow */
+        max-width: none;
+    }
 }
 
 /* Ensure individual lines behave correctly */
@@ -559,6 +561,14 @@ h4 {
     width: max-content;
     /* Ensure they take full need width */
     max-width: 100%;
+}
+
+@media (max-width: 1023px) {
+    .hero-title span {
+        width: auto;
+        white-space: normal;
+        word-wrap: break-word;
+    }
 }
 
 .hero-title .highlight {
@@ -1222,7 +1232,7 @@ h4 {
 /* Brand Watermark Text - Handles Scale (via JS) */
 .flavor-brand-watermark {
     font-family: var(--font-heading);
-    font-size: clamp(12rem, 27vw, 21rem);
+    font-size: clamp(3rem, 14vw, 21rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1348,43 +1358,41 @@ h4 {
     .flavor-showcase-grid {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
-        gap: var(--space-m);
+        gap: 0.5rem;
+        /* Tight gap */
         text-align: center;
     }
 
-    /* Reorder: Can first, Info second, List third */
-    .flavor-can {
-        order: 1;
-        min-height: 350px;
-    }
-
-    .flavor-info {
-        order: 2;
-        padding: 0;
-        align-items: center;
-    }
-
-    .flavor-info-desc {
-        max-width: 400px;
-        text-align: center;
-    }
-
-    .flavor-cta {
-        align-self: center;
-    }
-
+    /* Reorder: List First, Can Middle, Info Last */
     .flavor-list {
-        order: 3;
+        order: 1;
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: flex-start;
         /* Fix scroll accessibility */
         gap: 0;
-        padding: var(--space-s) 0 var(--space-s) 5vw;
+        padding: 0 0 var(--space-s) 5vw;
+        margin-bottom: 0;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
+    }
+
+    .flavor-can {
+        order: 2;
+        min-height: 250px;
+        /* Reduced from 350px */
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    .flavor-info {
+        order: 3;
+        padding: 0;
+        align-items: center;
+        margin-top: -1rem;
+        /* Pull closer to can */
     }
 
     .flavor-list::-webkit-scrollbar {
@@ -1418,8 +1426,16 @@ h4 {
     }
 
     .showcase-can-image {
-        max-height: 50vh;
-        min-height: 280px;
+        max-height: 40vh;
+        min-height: 220px;
+        transform: scale(1.0);
+        /* Reset transform, no vertical offset */
+    }
+}
+
+@media (hover: none) {
+    .showcase-can-image:hover {
+        transform: scale(1.0) translateY(-5%);
     }
 }
 
@@ -1780,7 +1796,7 @@ h4 {
 /* Mobile Responsiveness */
 @media (max-width: 900px) {
     .footer-can-lineup {
-        height: 250px;
+        height: 150px;
         margin-top: 0.5rem;
         /* Significantly reduced from 2rem to close gap */
         justify-content: flex-start;

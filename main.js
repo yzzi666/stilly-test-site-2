@@ -242,6 +242,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Reset scale to measure natural width accurately
         showcaseWatermark.style.transform = 'scale(1)';
 
+        // Mobile Override: Let CSS control it
+        if (window.innerWidth < 768) {
+            showcaseWatermark.style.transform = 'none';
+            return;
+        }
+
         // 2. Measure rendered width
         const naturalWidth = showcaseWatermark.getBoundingClientRect().width;
 
