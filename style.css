@@ -2231,3 +2231,115 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
         transform: scale(1.15) translateY(-4%) !important;
     }
 }
+
+/* ==========================================================================
+   RETAILER LOGO BANNER (V2 - Smooth Loop)
+   ========================================================================== */
+.retail-logos {
+    padding: var(--space-m) 0;
+    background-color: var(--color-light);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+    margin-top: -1px;
+}
+
+.logo-marquee {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    user-select: none;
+    display: flex;
+    /* Flex container for the wrapper */
+}
+
+/* Wrapper holds the two identical content blocks */
+.marquee-wrapper {
+    display: flex;
+    width: max-content;
+    /* Wrapper itself does NOT animate */
+}
+
+/* Each content block acts as a 'track' that moves */
+.marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    /* IMPORTANT: Padding right must equal gap for seamless loop */
+    padding-right: 6rem;
+
+    /* Hardware acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+
+    /* The Animation - Move -100% of SELF */
+    animation: scroll-retailers-smooth 80s linear infinite;
+    flex: 0 0 auto;
+    /* Stop shrinking */
+}
+
+/* Pause on hover */
+.logo-marquee:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.marquee-content img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.5);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: default;
+
+    /* Perf */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translateZ(0);
+}
+
+.marquee-content img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.1) translateZ(0);
+    cursor: pointer;
+}
+
+/* 
+   Logic: Move from 0 to -100% of the content block's width.
+   Since there are two identical blocks, when block 1 hits -100%, 
+   block 2 is exactly where block 1 started.
+*/
+@keyframes scroll-retailers-smooth {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+@media (max-width: 1024px) {
+    .marquee-content {
+        gap: 4rem;
+        padding-right: 4rem;
+        animation-duration: 60s;
+    }
+
+    .marquee-content img {
+        height: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .marquee-content {
+        gap: 3rem;
+        padding-right: 3rem;
+    }
+
+    .marquee-content img {
+        height: 28px;
+    }
+}
