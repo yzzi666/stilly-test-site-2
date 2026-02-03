@@ -164,8 +164,8 @@ h4 {
 }
 
 .logo-mark img {
-    height: 32px;
-    /* Standard mobile size */
+    height: 18px;
+    margin: 3px 0;
     filter: none;
 }
 
@@ -264,8 +264,8 @@ h4 {
     }
 
     .logo-mark img {
-        height: 48px;
-        /* Slightly larger as per previous request */
+        height: 32px;
+        margin: 12px 0;
     }
 
     /* Right Group */
@@ -477,7 +477,7 @@ h4 {
         /* Splash Image */
         --m-splash-scale: 1.2;
         --m-splash-top: 55%;
-        --m-splash-left: 40%;
+        --m-splash-left: 56%;
     }
 
     /* APPLYING VARIABLES */
@@ -697,18 +697,24 @@ h4 {
     z-index: 0;
     width: 150%;
     /* Increase splash size */
-    left: 50%;
+    left: 65%;
     top: 50%;
     /* Center anchor */
-    opacity: 1;
+    opacity: 0.5;
     pointer-events: none;
 
     /* Exposed Parameters for easy adjustment */
     --splash-scale: 1.2;
     --splash-rotate-start: 15deg;
     --splash-rotate-end: -5deg;
+
+    /* Visual Parameters */
+    --splash-saturation: 0.4;
+    --splash-hue: 0deg;
+    --splash-brightness: 1.1;
     --blur: 0.5px;
-    filter: blur(var(--blur));
+
+    filter: blur(var(--blur)) saturate(var(--splash-saturation)) hue-rotate(var(--splash-hue)) brightness(var(--splash-brightness));
 
     animation: float-splash 7s ease-in-out infinite;
 }
