@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Fade in elements - General (not flavor cards anymore)
-    const generalElements = document.querySelectorAll('.benefit-item, .statement-text, .hero-content, .flavor-info, .flavor-can');
+    // Fade in elements - General (Update to include new sections)
+    const generalElements = document.querySelectorAll('.benefit-item, .statement-text, .hero-content, .flavor-info, .flavor-can, .why-stilly, .story-section, .testimonial-section, .instagram-section');
 
     generalElements.forEach((el) => {
         el.style.opacity = '0';
