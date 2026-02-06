@@ -351,6 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (faqItem.classList.contains('active')) {
                 button.setAttribute('aria-expanded', 'true');
                 answerContainer.style.maxHeight = answerContainer.scrollHeight + 'px';
+            } else {
+                button.setAttribute('aria-expanded', 'false');
+                answerContainer.style.maxHeight = null;
             }
         });
     });
