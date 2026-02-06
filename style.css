@@ -1351,6 +1351,11 @@ h4 {
     background-color: var(--accent-color);
 }
 
+/* Default state (Desktop): Hidden */
+.swipe-arrow {
+    display: none;
+}
+
 /* ================================================
    MOBILE RESPONSIVE
    ================================================ */
@@ -1413,6 +1418,40 @@ h4 {
         line-height: 1.1;
     }
 
+    /* Mobile Swipe Hints */
+    .swipe-arrow {
+        display: block;
+        position: absolute;
+        top: 22%;
+        transform: translateY(-50%);
+        z-index: 10;
+        pointer-events: none;
+        color: #000;
+        opacity: 0.6;
+        animation: arrowFlash 2s infinite ease-in-out;
+        transition: opacity 0.3s ease;
+    }
+
+    .swipe-arrow.hidden {
+        opacity: 0;
+        visibility: hidden;
+        animation: none;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .swipe-arrow svg {
+        width: 32px;
+        height: 32px;
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+    }
+
     .flavor-brand-watermark {
         max-width: 90vw;
         /* Hard limit */
@@ -1424,38 +1463,55 @@ h4 {
         transform: translateX(-50%);
         /* Ensure true centering if absolute */
     }
+}
 
-    .flavor-list::-webkit-scrollbar {
-        display: none;
+
+
+@keyframes arrowFlash {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateY(-50%) scale(1);
     }
 
-    .flavor-list-item {
-        flex: 0 0 auto;
-        font-size: 1rem;
-        padding: 0.75rem 1.25rem;
-        white-space: nowrap;
-        scroll-snap-align: center;
-        text-align: center;
-        transform: none;
+    50% {
+        opacity: 0.8;
+        transform: translateY(-50%) scale(1.1);
     }
+}
 
-    .flavor-list-item:hover,
-    .flavor-list-item.active {
-        transform: none;
-    }
+.flavor-list::-webkit-scrollbar {
+    display: none;
+}
 
-    .flavor-list-item::before {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0.25rem;
-    }
+.flavor-list-item {
+    flex: 0 0 auto;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+    white-space: nowrap;
+    scroll-snap-align: center;
+    text-align: center;
+    transform: none;
+}
 
-    .flavor-list-item:hover::before,
-    .flavor-list-item.active::before {
-        width: 30px;
-    }
+.flavor-list-item:hover,
+.flavor-list-item.active {
+    transform: none;
+}
 
-    /* Fixed at end of file */
+.flavor-list-item::before {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0.25rem;
+}
+
+.flavor-list-item:hover::before,
+.flavor-list-item.active::before {
+    width: 30px;
+}
+
+/* Fixed at end of file */
 }
 
 @media (hover: none) {
@@ -2356,174 +2412,91 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 
 /* SECTION 1: Why STILLY */
 .why-stilly {
-    padding: 80px 40px;
+    padding: 100px 40px;
     background-color: var(--color-light);
     text-align: center;
 }
 
 .container-why {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-}
-
-.why-heading {
-    font-size: 48px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 60px;
-    font-family: var(--font-heading);
-}
-
-.why-stilly-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 40px;
 }
 
-.why-stilly-card {
-    text-align: center;
-    padding: 30px 20px;
-}
-
-.why-stilly-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    color: #000;
-    /* Default icon color */
+.why-icons-row {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.why-stilly-heading {
-    font-size: 20px;
-    font-weight: 700;
+.why-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.why-icon:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.why-text-content {
+    max-width: 800px;
+    text-align: center;
+}
+
+.why-heading {
+    font-size: 56px;
+    font-weight: 900;
     color: #000;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     font-family: var(--font-heading);
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.02em;
 }
 
-.why-stilly-body {
-    font-size: 16px;
+.why-body-text {
+    font-size: 20px;
     line-height: 1.6;
-    color: #555;
+    color: #333;
     font-family: var(--font-body);
+    font-weight: 400;
 }
 
-@media (max-width: 992px) {
-    .why-stilly-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .why-stilly {
         padding: 60px 20px;
     }
 
-    .why-heading {
-        font-size: 36px;
-        margin-bottom: 40px;
-    }
-
-    .why-stilly-grid {
-        grid-template-columns: 1fr;
+    .why-icons-row {
         gap: 30px;
     }
-}
 
-/* SECTION 2: Our Story */
-.story-section {
-    padding: 100px 40px;
-    background-color: var(--color-light);
-    width: 100%;
-}
-
-.container-story {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-
-.story-image-wrapper {
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    aspect-ratio: 6/7;
-}
-
-.story-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.story-content {
-    padding-left: 20px;
-    text-align: left;
-}
-
-.story-heading {
-    font-size: 42px;
-    font-weight: 700;
-    color: #C41E3A;
-    /* Brand Red */
-    line-height: 1.2;
-    margin-bottom: 24px;
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-}
-
-.story-subheading {
-    font-size: 18px;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-    font-family: var(--font-heading);
-    font-weight: 400;
-}
-
-.story-body p {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #333;
-    margin-bottom: 20px;
-    font-family: var(--font-body);
-}
-
-@media (max-width: 900px) {
-    .story-section {
-        padding: 60px 20px;
+    .why-icon {
+        width: 60px;
+        height: 60px;
     }
 
-    .story-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    .why-heading {
+        font-size: 40px;
     }
 
-    .story-content {
-        padding-left: 0;
-        text-align: center;
-        /* Center text on mobile for better balance? Or keep left. Spec said stack. */
-        text-align: left;
-    }
-
-    /* Optional: Order adjustment for mobile if needed, spec says Image Left (Top on Stack) which is default grid order */
-    .story-heading {
-        font-size: 32px;
+    .why-body-text {
+        font-size: 18px;
     }
 }
+
+/* SECTION 2: Our Story - REMOVED */
 
 /* SECTION 3: Social Proof */
 .testimonial-section {
@@ -2548,7 +2521,8 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 
 .testimonial-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    /* 2x2 Layout for 4 items */
     gap: 30px;
 }
 
@@ -2571,8 +2545,8 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 }
 
 .testimonial-quote {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 18px;
+    line-height: 1.6;
     color: #333;
     font-style: italic;
     margin-bottom: 20px;
@@ -2583,15 +2557,10 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 .testimonial-author {
     font-size: 14px;
     font-weight: 600;
-    color: #000;
+    color: #888;
     margin-bottom: 4px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-}
-
-.testimonial-location {
-    font-size: 13px;
-    color: #888;
 }
 
 @media (max-width: 768px) {
@@ -2601,6 +2570,131 @@ h2:not(.vp-header):not(.lifestyle-title):not(.statement-text) {
 
     .testimonial-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* FAQs Section */
+.faq-section {
+    padding: 100px 40px;
+    background-color: var(--color-light);
+    /* Matching site theme */
+}
+
+.faq-container {
+    max-width: 1200px;
+    /* Wider for 2 cols */
+    margin: 0 auto;
+}
+
+.faq-title {
+    font-size: 44px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Mobile: 1 col */
+    gap: 20px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .faq-grid {
+        grid-template-columns: 1fr 1fr;
+        /* Desktop: 2 cols */
+        gap: 40px;
+    }
+}
+
+.faq-item {
+    border-bottom: 1px solid #eee;
+}
+
+.faq-question-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.faq-question-btn:hover .faq-question-text {
+    color: #e62129;
+    /* Brand Red */
+}
+
+.faq-question-text {
+    font-size: 20px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    padding-right: 20px;
+}
+
+.faq-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+    color: #000;
+}
+
+.faq-item.active .faq-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-question-text {
+    color: #e62129;
+}
+
+/* Accordion Animation */
+.faq-answer-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.faq-answer-content {
+    padding-bottom: 24px;
+}
+
+.faq-answer {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    font-family: var(--font-body);
+}
+
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 60px 20px;
+    }
+
+    .faq-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .faq-question-text {
+        font-size: 18px;
+    }
+
+    .faq-answer {
+        font-size: 16px;
     }
 }
 

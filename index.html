@@ -116,91 +116,21 @@
     <!-- NEW: Why STILLY -->
     <section class="why-stilly">
         <div class="container container-why">
-            <h2 class="why-heading">Why STILLY?</h2>
-            <div class="why-stilly-grid">
-                <div class="why-stilly-card">
-                    <!-- Cocktail Glass Icon -->
-                    <div class="why-stilly-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 11h1a3 3 0 0 1 0 6h-1"></path>
-                            <path d="M9 12v6"></path>
-                            <path d="M8 21h8"></path>
-                            <path d="M6 5h12"></path>
-                            <path d="M6 5v6a6 6 0 0 0 12 0V5"></path>
-                        </svg>
-                    </div>
-                    <h3 class="why-stilly-heading">Premium Vodka + Real Juice</h3>
-                    <p class="why-stilly-body">We use only premium vodka and 100% natural fruit juice. No concentrates,
-                        no shortcuts, just pure ingredients.</p>
-                </div>
-                <div class="why-stilly-card">
-                    <!-- 110 Icon -->
-                    <div class="why-stilly-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M16 12l-4-4-4 4"></path>
-                            <path d="M12 16V8"></path>
-                        </svg>
-                        <!-- Using generic 'light' feel icon since literal '110' is hard in simple SVG, or just text? Prompt said icon of 110. Ill use text in SVG or generic 'low calorie' weight/fire -->
-                    </div>
-                    <h3 class="why-stilly-heading">Only 110 Calories</h3>
-                    <p class="why-stilly-body">Great taste without the guilt. Low calorie, low sugar, but never low on
-                        flavor.</p>
-                </div>
-                <div class="why-stilly-card">
-                    <!-- Natural Leaf Icon -->
-                    <div class="why-stilly-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 22s5-3 8-10c0 0-2-6-8-10 8 0 16 4 16 10 0 0-4 3-8 4"></path>
-                            <path d="M8 22c0-8 6-12 6-12"></path>
-                        </svg>
-                    </div>
-                    <h3 class="why-stilly-heading">Natural Ingredients</h3>
-                    <p class="why-stilly-body">No artificial flavors, no artificial sweeteners, no nonsense. Just real
-                        fruit, real vodka, real good.</p>
-                </div>
-                <div class="why-stilly-card">
-                    <!-- Checkmark Icon -->
-                    <div class="why-stilly-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                    </div>
-                    <h3 class="why-stilly-heading">Gluten Free</h3>
-                    <p class="why-stilly-body">Certified gluten-free and made for everyone who wants to enjoy life
-                        without compromise.</p>
-                </div>
+            <!-- Icons Row -->
+            <div class="why-icons-row">
+                <img src="assets/icons/abv-4-7.svg" alt="4.7% ABV" class="why-icon">
+                <img src="assets/icons/no-sugar.svg" alt="No Sugar" class="why-icon">
+                <img src="assets/icons/gluten-free.svg" alt="Gluten Free" class="why-icon">
+                <img src="assets/icons/no-artificial-colors.svg" alt="No Artificial Colors" class="why-icon">
+                <img src="assets/icons/no-sweetener.svg" alt="No Sweetener" class="why-icon">
             </div>
-        </div>
-    </section>
 
-    <!-- NEW: Our Story -->
-    <section class="story-section">
-        <div class="container container-story">
-            <div class="story-grid">
-                <div class="story-image-wrapper">
-                    <img src="assets/story/our-story.png" alt="Stilly Founders" class="story-image">
-                </div>
-                <div class="story-content">
-                    <h2 class="story-heading">Natural Ingredients, Pure Fun</h2>
-                    <h3 class="story-subheading">Our Story</h3>
-                    <div class="story-body">
-                        <p>We started STILLY because we were tired of choosing between great taste and feeling great.
-                            Every cocktail on the market was either loaded with sugar and artificial ingredients, or
-                            tasted like compromise.</p>
-                        <p>So we created something better: premium vodka meets 100% natural fruit juice. Real
-                            ingredients, real flavor, and only 110 calories. No artificial sweeteners. No guilt. No
-                            compromise.</p>
-                        <p>STILLY is for the people who want to enjoy life — at the beach, on the golf course, at the
-                            rooftop party, or just a Tuesday. Made with care, crafted for fun.</p>
-                    </div>
-                    <a href="#about" class="btn btn-outline" style="margin-top: 24px;"><span class="btn-bg"></span>Learn
-                        More</a>
-                </div>
+            <!-- Text Content -->
+            <div class="why-text-content">
+                <h2 class="why-heading">Why STILLY?</h2>
+                <p class="why-body-text">STILLY is a premium canned vodka cocktail brand that combines bold, natural
+                    fruit juice with high-quality, smooth vodka. Each 12oz can contains 4.7% ABV, 110 calories, light
+                    carbonation, and nothing artificial.</p>
             </div>
         </div>
     </section>
@@ -280,6 +210,20 @@
                 <button class="flavor-list-item" data-flavor="retox">Retox</button>
                 <button class="flavor-list-item" data-flavor="aiming-fluid">Aiming Fluid</button>
             </nav>
+
+            <!-- Mobile Swipe Hints (Left/Right) -->
+            <div class="swipe-arrow arrow-left hidden">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </div>
+            <div class="swipe-arrow arrow-right">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </div>
 
         </div>
     </section>
@@ -432,24 +376,25 @@
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-quote">"Finally, a canned cocktail that doesn't taste fake! The Blackberry is
-                        incredible — like real fruit, not syrup."</p>
-                    <div class="testimonial-author">Sarah M.</div>
-                    <div class="testimonial-location">Los Angeles, CA</div>
+                    <p class="testimonial-quote">"One of the best vodka cocktails on the market."</p>
+                    <div class="testimonial-author">3 Months ago</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-quote">"Perfect for the pool, the golf course, or just chilling. 110 calories
-                        and tastes way better than the other seltzers."</p>
-                    <div class="testimonial-author">Mike T.</div>
-                    <div class="testimonial-location">Austin, TX</div>
+                    <p class="testimonial-quote">"Best canned cocktails available. Doesn’t taste artificial, not too
+                        bubbly and delicious."</p>
+                    <div class="testimonial-author">6 months ago</div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-quote">"I'm obsessed with the Pineapple flavor. Natural ingredients, low
-                        calorie, and actually tastes amazing. My new go-to!"</p>
-                    <div class="testimonial-author">Jessica R.</div>
-                    <div class="testimonial-location">Miami, FL</div>
+                    <p class="testimonial-quote">"Love STILLY as they are not too sweet but still have good flavor.
+                        These are my go-to!"</p>
+                    <div class="testimonial-author">1 year ago</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-quote">"Amazing! Lightly carbonated and not so sweet! My new favorite!"</p>
+                    <div class="testimonial-author">2 months ago</div>
                 </div>
             </div>
         </div>
@@ -459,7 +404,8 @@
     <section class="instagram-section">
         <div class="container container-instagram">
             <h2 class="instagram-heading">Join the #StillyLife</h2>
-            <p class="instagram-subheading">Follow @drinkSTILLY for summer vibes, recipes, and good times</p>
+            <p class="instagram-subheading">Follow drinkstilly for access to giveaways, summer recipes, flavor drops,
+                and more!</p>
             <div class="instagram-grid">
                 <a href="https://instagram.com/drinkstilly" class="instagram-item" target="_blank" rel="noopener">
                     <img src="assets/instagram/post-1.png" alt="Stilly Instagram Post">
@@ -530,6 +476,180 @@
             </div>
             <a href="https://instagram.com/drinkstilly" class="instagram-cta" target="_blank" rel="noopener">Follow
                 @drinkSTILLY on Instagram</a>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faq-section">
+        <div class="container faq-container">
+            <h2 class="section-heading faq-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">What is STILLY?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY is a premium canned vodka cocktail brand that combines bold,
+                                natural fruit flavors with high-quality vodka. Each 12oz can contains 4.7% ABV, 110
+                                calories, light carbonation, and nothing artificial. Available in 8 refreshing flavors
+                                including Tangerine, Lime, Grapefruit, Peach, Pineapple, Blackberry, Black Cherry, and
+                                Cranberry Lime. It’s NOT a seltzer, it’s a STILLY!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">Where can I buy STILLY?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY is available at select retailers across the United States. Use
+                                our store locator at stilly.com to find STILLY near you! Follow @drinkstilly on social
+                                media for updates.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">How many calories are in STILLY?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">Each 12oz can of STILLY contains only 110 calories with no added sugar
+                                and only 4g carbs. STILLY is gluten-free and made with premium vodka and natural fruit
+                                flavors, making it a cleaner choice for those watching their intake.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">What makes STILLY different from other hard seltzers?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY is made with premium vodka (not malt liquor), delivering a
+                                cleaner, smoother taste. With bold, authentic natural fruit juice and zero added sugar,
+                                STILLY stands out in taste and quality. It's refreshing, flavorful, and never watered
+                                down. #LikeNothingElse</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">Is STILLY gluten-free?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">Yes! STILLY is 100% gluten-free. Made with premium vodka and natural
+                                fruit flavors, STILLY contains no gluten.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">What flavors does STILLY come in?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY offers 8 vibrant flavors:<br>• Tangerine – Bright, citrusy,
+                                refreshing<br>• Lime – Classic, crisp, zesty<br>• Grapefruit – Tart and
+                                invigorating<br>• Peach – Sweet and smooth<br>• Pineapple – Tropical and juicy<br>•
+                                Blackberry – Bold berry flavor<br>• Black Cherry – Rich and fruity<br>• Cranberry Lime –
+                                Tangy and balanced</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">What occasions is STILLY best for?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY is perfect for any occasion: beach days, pool parties, golf
+                                outings, BBQs, brunch, tailgates, or just relaxing at home. With bold flavors and a
+                                refreshing finish, STILLY fits seamlessly into active, social lifestyles.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">Is STILLY available nationwide?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY is rapidly expanding across the United States. Check our store
+                                locator at stilly.com for current availability in your state. Don't see STILLY near you?
+                                Request it at your local retailer or reach out to us at @drinkstilly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question-btn" aria-expanded="false">
+                        <span class="faq-question-text">What's the alcohol content in STILLY?</span>
+                        <span class="faq-toggle-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer-container">
+                        <div class="faq-answer-content">
+                            <p class="faq-answer">STILLY contains 4.7% ABV (alcohol by volume) per 12oz can, delivering
+                                a perfectly balanced buzz with naturally refreshing flavor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

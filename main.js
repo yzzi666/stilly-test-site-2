@@ -334,4 +334,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ================================================
+    // FAQ ACCORDION INTERACTION
+    // ================================================
+    const faqButtons = document.querySelectorAll('.faq-question-btn');
+
+    faqButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.closest('.faq-item');
+            const answerContainer = faqItem.querySelector('.faq-answer-container');
+            const isExpanded = btn => btn.getAttribute('aria-expanded') === 'true';
+
+            // Toggle Current Item
+            faqItem.classList.toggle('active');
+
+            if (faqItem.classList.contains('active')) {
+                button.setAttribute('aria-expanded', 'true');
+                answerContainer.style.maxHeight = answerContainer.scrollHeight + 'px';
+            }
+        });
+    });
+
+    // ================================================
+    // MOBILE SWIPE HINTS (Bidirectional)
+    // ================================================
+    const flavorListScroll = document.getElementById('flavor-list');
+    const arrowLeft = document.querySelector('.arrow-left');
+    const arrowRight = document.querySelector('.arrow-right');
+
+    if (flavorListScroll && arrowLeft && arrowRight) {
+        const updateArrows = () => {
+            // Check if scrollable
+            const maxScroll = flavorListScroll.scrollWidth - flavorListScroll.clientWidth;
+
+            // Only run if actually scrollable (mostly mobile)
+            if (maxScroll <= 0) {
+                arrowLeft.classList.add('hidden');
+                arrowRight.classList.add('hidden');
+                return;
+            }
+
+            // Left Arrow: Show if scrolled > 10px
+            if (flavorListScroll.scrollLeft > 10) {
+                arrowLeft.classList.remove('hidden');
+            } else {
+                arrowLeft.classList.add('hidden');
+            }
+
+            // Right Arrow: Show if NOT at end (tolerance 10px)
+            if (flavorListScroll.scrollLeft < maxScroll - 10) {
+                arrowRight.classList.remove('hidden');
+            } else {
+                arrowRight.classList.add('hidden');
+            }
+        };
+
+        // Event Listeners
+        flavorListScroll.addEventListener('scroll', updateArrows, {
+            passive: true
+        });
+        window.addEventListener('resize', updateArrows);
+
+        // Initial check (delay slightly for layout)
+        setTimeout(updateArrows, 100);
+    }
+
 });
